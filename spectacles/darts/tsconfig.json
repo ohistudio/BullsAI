@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "isolatedModules": true,
+    "lib": [
+      "es2021"
+    ],
+    "module": "commonjs",
+    "noEmit": true,
+    "paths": {
+      "*": [
+        "./Assets/*",
+        "./Packages/*",
+        "./Cache/TypeScript/Src/Packages/*"
+      ],
+      "Bitmoji 3D.lsc/*": [
+        "./Assets/Bitmoji 3D.lsc/*",
+        "./Cache/TypeScript/Src/Assets/Bitmoji 3D.lsc/*"
+      ],
+      "Character Animation 2.lspkg/*": [
+        "./Assets/Character Animation 2.lspkg/*",
+        "./Cache/TypeScript/Src/Assets/Character Animation 2.lspkg/*"
+      ],
+      "Character Animation 3.lspkg/*": [
+        "./Assets/Character Animation 3.lspkg/*",
+        "./Cache/TypeScript/Src/Assets/Character Animation 3.lspkg/*"
+      ],
+      "Character Animation 4.lspkg/*": [
+        "./Assets/Character Animation 4.lspkg/*",
+        "./Cache/TypeScript/Src/Assets/Character Animation 4.lspkg/*"
+      ]
+    },
+    "skipDefaultLibCheck": true,
+    "target": "es2021",
+    "types": []
+  },
+  "exclude": [
+    "node_modules/typescript/lib/lib.dom.d.ts"
+  ],
+  "include": [
+    "./Cache/TypeScript/lib/LensifyTS/Declarations/**/*.d.ts",
+    "./Assets/**/*.ts",
+    "./Packages/**/*.ts",
+    "./Cache/TypeScript/Src/Packages/**/*.ts",
+    "./Cache/TypeScript/Src/Assets/Character Animation 4.lspkg/**/*.ts",
+    "./Cache/TypeScript/Src/Assets/Bitmoji 3D.lsc/**/*.ts",
+    "./Cache/TypeScript/Src/Assets/Character Animation 3.lspkg/**/*.ts",
+    "./Cache/TypeScript/Src/Assets/Character Animation 2.lspkg/**/*.ts"
+  ]
+}

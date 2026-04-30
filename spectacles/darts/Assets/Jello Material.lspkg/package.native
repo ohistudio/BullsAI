@@ -1,0 +1,37 @@
+- !<NativePackageDescriptor/c3e72c90-e423-4be9-9873-8719ef5f4ae6>
+  PackagePath: ""
+  StudioVersion:
+    major: 5
+    minor: 15
+    patch: 0
+    build: 25101318
+    type: Unset
+    buildFlavor: ""
+    timestamp: 0
+    commit: ""
+  Description: Jello Material This material creates a jiggle jelly effect by vertex distortion. Comes with animation and refraction controls. Works best on a 3d object with higher vertex counts.
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  VersionMajor: 1
+  VersionMinor: 0
+  VersionPatch: 0
+  UpdateCheckpoint: 76
+  ExportUid: a4210e67-0365-47f4-81c6-89e210b5ae19
+  ComponentUid: 3b52e96c-d83b-47dd-a9b3-4d9b427b0545
+  PackagePolicy: CanBeUnpackedTransparent
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  Instantiable: !<reference> 00000000-0000-0000-0000-000000000000
+  AssetLibraryDependencyStructure: !<AssetLibraryDependencyStructure>
+    Name: ""
+    AssetId: ""
+    Hash: ""
+    Version:
+      major: 0
+      minor: 0
+      patch: 0
+      build: 0

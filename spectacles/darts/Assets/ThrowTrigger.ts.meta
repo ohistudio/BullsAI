@@ -1,0 +1,47 @@
+- !<AssetImportMetadata/3f1a48f6-f92b-4dda-a398-7f7d2d404071>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 47c367f7-6408-443f-8edd-20bb9073b47c
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 47c367f7-6408-443f-8edd-20bb9073b47c
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 64204685-e88d-4434-b28c-e860a6f88dd8
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/64204685-e88d-4434-b28c-e860a6f88dd8>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 58811fad-99d2-4f23-9fe4-d3316e37d8f7
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    dartBoard: false
+    throwCooldown: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - dartBoard: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      throwCooldown: !<float> 3.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType dartBoard
+    - // @input float throwCooldown = 3

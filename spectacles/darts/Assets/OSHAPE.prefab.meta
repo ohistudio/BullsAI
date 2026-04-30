@@ -1,0 +1,72 @@
+- !<AssetImportMetadata/17ffec74-c99a-4f45-afab-e1deb88d12f0>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 1ba079b0-c7cb-46cb-8498-1e2efcddda10
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 1ba079b0-c7cb-46cb-8498-1e2efcddda10
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 5e797e5c-a4db-4185-9cc6-81995944216a
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<SceneObject/5e417e2d-4625-4284-6065-2e9966be6828>
+  PrefabRemaps:
+    []
+  Name: OSHAPE
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 738c7d52-4b05-4397-7c5e-c1c609741621
+  Components:
+    []
+- !<ObjectPrefabAssetData/5e797e5c-a4db-4185-9cc6-81995944216a>
+  Prototype: !<ObjectOwner/0fb1af19-1a99-4bb1-b7b4-15e8e6e03e02>
+    PackagePath: ""
+    objects:
+      - !<own> 5e417e2d-4625-4284-6065-2e9966be6828
+- !<SceneObject/738c7d52-4b05-4397-7c5e-c1c609741621>
+  PrefabRemaps:
+    - 738c7d52-4b05-4397-7c5e-c1c609741621: 1e32502e-be34-4882-4afd-54b1b29eca20
+    - d4e512e1-9bf1-4dbf-5c56-edabe040d6a4: 969f3ff9-b6b7-49c5-694d-664e5d23329e
+  Name: O
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 90.000000, y: -0.000003, z: -45.000015}
+    Scale: {x: 3.000000, y: 3.000000, z: 3.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> d4e512e1-9bf1-4dbf-5c56-edabe040d6a4
+- !<RenderMeshVisual/d4e512e1-9bf1-4dbf-5c56-edabe040d6a4>
+  PrefabRemaps:
+    []
+  Name: Torus.001
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> e0c15867-71ef-443f-88cc-fff6e64dd9d1
+  Mesh: !<reference> 51bce72c-9362-41e0-8bb6-0e3fcad7c610
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}

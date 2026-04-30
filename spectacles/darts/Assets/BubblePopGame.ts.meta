@@ -1,0 +1,115 @@
+- !<AssetImportMetadata/972ffe83-fd6a-4630-adc2-10fdfa948bdd>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> f7ec7f0e-f6b2-4e2b-af08-5d0e4595415d
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> f7ec7f0e-f6b2-4e2b-af08-5d0e4595415d
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 417914eb-a152-425f-a984-3ce4bf109095
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/417914eb-a152-425f-a984-3ce4bf109095>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: a99fa07f-335c-478f-b0e6-97cca9dd60c4
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    audioComponent: false
+    blueBubblePrefab: false
+    bubbleScale: false
+    bubbleSpacing: false
+    clearedSound: false
+    clusterCount: false
+    clusterRadius: false
+    colorText: false
+    dartBoard: false
+    gravity: false
+    greenBubblePrefab: false
+    hitRadius: false
+    maxBubbles: false
+    minBubbles: false
+    missSound: false
+    popForce: false
+    popSound: false
+    redBubblePrefab: false
+    scoreText: false
+    spinSpeed: false
+    statusText: false
+    wrongColorSound: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - dartBoard: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      redBubblePrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      greenBubblePrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      blueBubblePrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      scoreText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      colorText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      statusText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      minBubbles: !<float> 12.000000
+      maxBubbles: !<float> 20.000000
+      clusterCount: !<float> 4.000000
+      hitRadius: 0.080000
+      clusterRadius: 0.130000
+      bubbleScale: !<float> 2.000000
+      bubbleSpacing: 0.100000
+      popForce: !<float> 1.000000
+      gravity: 2.500000
+      spinSpeed: !<float> 360.000000
+      popSound: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      missSound: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      wrongColorSound: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      clearedSound: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      audioComponent: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType dartBoard
+    - '// @ui {"widget":"group_start", "label":"Bubble Prefabs"}'
+    - // @input Asset.ObjectPrefab redBubblePrefab
+    - // @input Asset.ObjectPrefab greenBubblePrefab
+    - // @input Asset.ObjectPrefab blueBubblePrefab
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"UI"}'
+    - // @input Component.Text scoreText
+    - // @input Component.Text colorText
+    - // @input Component.Text statusText
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Game Settings"}'
+    - // @input float minBubbles = 12
+    - // @input float maxBubbles = 20
+    - // @input float clusterCount = 4
+    - // @input float hitRadius = 0.1
+    - // @input float clusterRadius = 0.13
+    - // @input float bubbleScale = 2.5
+    - '// @input float bubbleSpacing = 0.12 {"hint":"Min spacing — touching but not overlapping"}'
+    - '// @input float popForce = 1 {"hint":"Initial outward burst speed when popped"}'
+    - '// @input float gravity = 2.5 {"hint":"Gravity pulling falling bubbles down"}'
+    - '// @input float spinSpeed = 360 {"hint":"Bubble spin speed when falling"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Sounds"}'
+    - // @input Asset.AudioTrackAsset popSound
+    - // @input Asset.AudioTrackAsset missSound
+    - // @input Asset.AudioTrackAsset wrongColorSound
+    - // @input Asset.AudioTrackAsset clearedSound
+    - // @input Component.AudioComponent audioComponent
+    - '// @ui {"widget":"group_end"}'

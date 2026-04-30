@@ -1,0 +1,102 @@
+- !<AssetImportMetadata/34b22613-7b9e-4e40-b51d-e14032d45602>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 7dfe1c0d-5cb2-42bb-b8b0-c143430b76cc
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 7dfe1c0d-5cb2-42bb-b8b0-c143430b76cc
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 27a0f7dd-42c6-43a9-81a8-71f6ea98fd37
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/27a0f7dd-42c6-43a9-81a8-71f6ea98fd37>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: e734dc14-60a1-42ab-93b8-fec141ad924b
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    blinkMaxInterval: false
+    blinkMinInterval: false
+    blinkSpeed: false
+    idleBreathing: false
+    leftEye: false
+    leftPupil: false
+    leftPupilMax: false
+    lookSpeed: false
+    lookTarget: false
+    mouthObj: false
+    mouthOpenAmount: false
+    pupilRange: false
+    rightEye: false
+    rightPupil: false
+    rightPupilMax: false
+    tongueObj: false
+    tongueWiggle: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - leftEye: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      rightEye: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      leftPupil: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      rightPupil: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      mouthObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tongueObj: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      mouthOpenAmount: 0.600000
+      tongueWiggle: true
+      lookTarget: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      pupilRange: 0.300000
+      lookSpeed: !<float> 8.000000
+      leftPupilMax: !<Vec4> {x: 0.300000, y: -0.300000, z: 0.300000, w: -0.300000}
+      rightPupilMax: !<Vec4> {x: 0.300000, y: -0.300000, z: 0.300000, w: -0.300000}
+      blinkMinInterval: !<float> 2.000000
+      blinkMaxInterval: !<float> 6.000000
+      blinkSpeed: !<float> 12.000000
+      idleBreathing: true
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Eyes"}'
+    - // @input SceneObject leftEye
+    - // @input SceneObject rightEye
+    - // @input SceneObject leftPupil
+    - // @input SceneObject rightPupil
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Mouth"}'
+    - // @input SceneObject mouthObj
+    - // @input SceneObject tongueObj
+    - // @input float mouthOpenAmount = 0.6
+    - // @input bool tongueWiggle = true
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Look At"}'
+    - // @input SceneObject lookTarget
+    - // @input float pupilRange = 0.3
+    - // @input float lookSpeed = 8
+    - "// @input vec4 leftPupilMax = {0.3,-0.3,0.3,-0.3}"
+    - "// @input vec4 rightPupilMax = {0.3,-0.3,0.3,-0.3}"
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Blink"}'
+    - // @input float blinkMinInterval = 2
+    - // @input float blinkMaxInterval = 6
+    - // @input float blinkSpeed = 12
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Body"}'
+    - // @input bool idleBreathing = true
+    - '// @ui {"widget":"group_end"}'
