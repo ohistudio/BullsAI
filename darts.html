@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>BullsAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'SuperFortrees';
+    src: url('assets/SuperFortrees.ttf') format('truetype');
+    font-display: swap;
+  }
+  :root{
+    --bg:#0a0a0f;
+    --surface:#14141f;
+    --border:#1e1e30;
+    --accent:#00e68a;
+    --red:#ff4d6a;
+    --text:#e8e8f0;
+    --text-dim:#6b6b80;
+    /* BullsAI brand */
+    --purple:#C09BFF;
+    --purple-light:#E0B7FF;
+    --orange:#F18B5C;
+    --yellow:#F0DB7A;
+    --gold:#F0DB7A;
+    --blue:#C09BFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;touch-action:manipulation}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh}
+  .app{display:flex;flex-direction:column;height:100dvh;max-width:480px;margin:0 auto}
+
+  .header{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);gap:12px}
+  .header .logo{height:36px;width:36px}
+  .header h1{font-family:'SuperFortrees','Space Mono',monospace;font-size:24px;letter-spacing:3px;flex:1}
+  .header h1 .ai{color:var(--purple)}
+  .badge{font-family:'Space Mono',monospace;font-size:11px;padding:4px 10px;border-radius:4px;border:1px solid var(--purple);color:var(--purple)}
+
+  /* ─── Lobby ─── */
+  .lobby{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;gap:20px}
+  .lobby .mascot{width:140px;height:140px;margin-bottom:8px}
+  .lobby h2{font-family:'SuperFortrees','Space Mono',monospace;font-size:26px;text-align:center;letter-spacing:2px}
+  .lobby .sub{font-size:13px;color:var(--text-dim);text-align:center;line-height:1.5}
+  .mode-btns{display:flex;gap:12px;width:100%;max-width:320px}
+  .mode-btn{flex:1;padding:20px 16px;border:2px solid var(--border);border-radius:50px;background:var(--surface);cursor:pointer;text-align:center;transition:all .2s}
+  .mode-btn:hover{border-color:var(--purple)}
+  .mode-btn.active{border-color:var(--purple);background:rgba(192,155,255,.12)}
+  .mode-btn .label{font-family:'SuperFortrees','Space Mono',monospace;font-size:14px;font-weight:700;color:var(--text);letter-spacing:1px}
+  .mode-btn .desc{font-size:10px;color:var(--text-dim);margin-top:6px}
+  .code-input{font-family:'SuperFortrees','Space Mono',monospace;font-size:28px;text-align:center;letter-spacing:8px;width:220px;padding:14px;background:var(--surface);border:2px solid var(--border);border-radius:50px;color:var(--text);text-transform:uppercase}
+  .code-input:focus{outline:none;border-color:var(--purple)}
+
+  /* Brand pill buttons */
+  .btn{padding:16px 32px;border:none;border-radius:50px;font-family:'SuperFortrees','Space Mono',monospace;font-size:14px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:2px;-webkit-user-select:none;transition:transform .1s, box-shadow .2s}
+  .btn:active{transform:scale(.96)}
+  .btn-go,.btn-purple{background:var(--purple);color:#1a1030;box-shadow:0 4px 14px rgba(192,155,255,.4)}
+  .btn-orange{background:var(--orange);color:#3a1a08;box-shadow:0 4px 14px rgba(241,139,92,.4)}
+  .btn-yellow{background:var(--yellow);color:#3a3008;box-shadow:0 4px 14px rgba(240,219,122,.4)}
+  .btn-red{background:var(--red);color:#fff}
+  .btn-blue{background:var(--purple);color:#1a1030}
+  .btn-dim{background:var(--surface);color:var(--text-dim);border:2px solid var(--border);border-radius:50px}
+  .or{font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim)}
+
+  .btn-icon{background:transparent;color:var(--purple);border:1px solid var(--purple);border-radius:50px;padding:6px 14px;font-family:'SuperFortrees','Space Mono',monospace;font-size:11px;cursor:pointer;letter-spacing:1px}
+  .btn-icon:active{transform:scale(.96)}
+
+  /* ─── Game ─── */
+  .game{flex:1;display:none;flex-direction:column}
+  .game.show{display:flex}
+
+  .status-bar{padding:10px 20px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .turn{font-family:'Space Mono',monospace;font-size:14px}
+  .turn .player{font-weight:700;font-size:20px}
+  .turn .player.x{color:var(--red)} .turn .player.o{color:var(--purple)}
+  .game-code{font-family:'SuperFortrees','Space Mono',monospace;font-size:18px;color:var(--yellow);letter-spacing:3px}
+  .scores{display:flex;gap:20px;font-family:'Space Mono',monospace;font-size:14px}
+  .scores .x{color:var(--red)} .scores .o{color:var(--blue)}
+
+  .toolbar{display:none;gap:5px;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);align-items:center;flex-wrap:wrap}
+  .toolbar.show{display:flex}
+  .toolbar.show{display:flex}
+  .toolbar label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
+  .toolbar input[type="range"]{width:50px;accent-color:var(--blue)}
+  .toolbar .val{font-family:'Space Mono',monospace;font-size:11px;color:var(--blue);width:22px}
+
+  .view-area{flex:1;position:relative;background:#000;overflow:hidden}
+  #video{width:100%;height:100%;object-fit:cover}
+  #overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+  .board-grid{flex:1;display:none;padding:20px;align-items:center;justify-content:center}
+  .board-grid.show{display:flex}
+  .grid{display:grid;grid-template-columns:repeat(3,90px);grid-template-rows:repeat(3,90px);gap:4px}
+  .cell{background:var(--surface);border:2px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:36px;font-weight:700}
+  .cell.x{color:var(--red);border-color:var(--red)} .cell.o{color:var(--blue);border-color:var(--blue)}
+
+  .mini-view{position:absolute;top:8px;right:8px;width:160px;height:160px;border:1px solid var(--border);border-radius:4px;overflow:hidden;z-index:5;background:#000;display:none}
+  .mini-view canvas{width:100%;height:100%}
+  .mini-label{position:absolute;bottom:2px;left:4px;font-family:'Space Mono',monospace;font-size:9px;color:var(--blue);text-shadow:0 0 4px #000}
+
+  .info-line{position:absolute;bottom:8px;left:8px;right:8px;font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);background:var(--surface);padding:3px 8px;border-radius:4px;z-index:5}
+
+  .toast{position:absolute;top:16px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--surface);border:1px solid var(--accent);border-radius:8px;padding:12px 20px;font-family:'Space Mono',monospace;font-size:14px;text-align:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:10;min-width:200px}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+  .toast .main{font-weight:700;font-size:20px;display:block;margin-bottom:2px}
+  .toast .sub{color:var(--text-dim);font-size:11px}
+
+  .hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--gold);border-radius:8px;padding:8px 16px;font-family:'Space Mono',monospace;font-size:11px;color:var(--gold);z-index:5;text-align:center;max-width:90%}
+
+  .controls{padding:14px 20px;display:flex;gap:10px;background:var(--bg);border-top:1px solid var(--border);position:relative;z-index:40}
+
+  .win-banner{position:absolute;inset:0;background:rgba(0,0,0,.85);display:none;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:30}
+  .win-banner.show{display:flex}
+  .win-banner .big{font-family:'Space Mono',monospace;font-size:36px;font-weight:700}
+  .win-banner .small{font-family:'Space Mono',monospace;font-size:14px;color:var(--text-dim)}
+  .win-banner .btn{margin-top:8px}
+
+  .pulse{animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .loading-text{font-family:'Space Mono',monospace;font-size:12px;color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <img class="logo" src="assets/mascot.png" alt="BullsAI" onerror="this.style.display='none'">
+    <h1>BULLS<span class="ai">AI</span></h1>
+    <div class="badge" id="connBadge">OFFLINE</div>
+  </div>
+
+  <!-- Lobby -->
+  <div class="lobby" id="lobby">
+    <img class="mascot" src="assets/mascot.png" alt="BullsAI" onerror="this.style.display='none'">
+    <h2>Welcome to BullsAI</h2>
+    <div class="sub">Set up your phone as the dart detector,<br>then pair with your Spectacles.</div>
+    <div class="mode-btns">
+      <div class="mode-btn" id="modeRecorder" onclick="selectMode('recorder')">
+        <div class="label">RECORDER</div>
+        <div class="desc">Phone watching the board</div>
+      </div>
+      <div class="mode-btn" id="modePlayer" onclick="selectMode('player')">
+        <div class="label">PLAYER</div>
+        <div class="desc">Spectacles / throwing darts</div>
+      </div>
+    </div>
+
+    <div style="margin-top:10px">
+      <button class="btn btn-purple" onclick="createGame()">CREATE GAME</button>
+    </div>
+    <div class="or">— or join existing —</div>
+    <input class="code-input" id="codeInput" maxlength="4" placeholder="CODE">
+    <button class="btn btn-yellow" onclick="joinGame()">JOIN</button>
+  </div>
+
+  <!-- Game -->
+  <div class="game" id="game">
+    <div class="status-bar">
+      <div class="game-code" id="gameCodeLabel"></div>
+      <button class="btn-icon" onclick="toggleSettings()" title="Settings" id="settingsBtn">SETTINGS</button>
+    </div>
+
+    <!-- Recorder: camera + detection -->
+    <div class="toolbar" id="toolbar">
+      <label>Hue</label>
+      <input type="range" id="hueCenter" min="15" max="45" value="28" oninput="$('hueVal').textContent=this.value">
+      <div class="val" id="hueVal">28</div>
+      <label>±</label>
+      <input type="range" id="hueRange" min="5" max="40" value="12" oninput="$('rangeVal').textContent=this.value">
+      <div class="val" id="rangeVal">12</div>
+      <label>Sat</label>
+      <input type="range" id="satMin" min="20" max="200" value="80" oninput="$('satVal').textContent=this.value">
+      <div class="val" id="satVal">80</div>
+      <label>Tip</label>
+      <input type="range" id="tipOffset" min="0" max="50" value="20" oninput="$('tipVal').textContent=this.value+'px'">
+      <div class="val" id="tipVal">20px</div>
+      <button class="btn btn-dim" id="debugBtn" onclick="toggleDebug()" style="color:var(--purple);border-color:var(--purple);padding:6px 14px;font-size:11px">DEBUG</button>
+    </div>
+
+    <div class="view-area" id="viewArea" style="display:none">
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="overlay" onclick="tapBoardCenter(event)"></canvas>
+      <div class="mini-view" id="miniView">
+        <canvas id="maskCanvas"></canvas>
+        <div class="mini-label" id="miniLabel">MASK</div>
+      </div>
+      <div class="info-line" id="infoLine"></div>
+      <div class="toast" id="toast"><span class="main" id="tMain"></span><span class="sub" id="tSub"></span></div>
+      <div class="hint" id="hint">Tap the bullseye to lock board center</div>
+    </div>
+
+    <!-- Player: board view -->
+    <div class="board-grid" id="boardGrid">
+      <div>
+        <div class="grid" id="grid"></div>
+        <div style="text-align:center;margin-top:16px">
+          <div class="loading-text pulse" id="waitText" style="display:none">Waiting for detection...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="win-banner" id="winBanner">
+      <div class="big" id="winText"></div>
+      <div class="small" id="winSub"></div>
+      <button class="btn btn-go" onclick="newRound()">NEW ROUND</button>
+    </div>
+
+    <div class="controls" id="controls">
+      <button class="btn btn-dim" onclick="leaveGame()">LEAVE</button>
+      <button class="btn btn-orange" id="calBtn" onclick="runCalibration()">CALIBRATE</button>
+    </div>
+
+    <!-- Debug: clickable board -->
+    <div id="debugBoard" style="display:none;padding:20px;text-align:center">
+      <div style="font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);margin-bottom:8px">
+        DEBUG — Click to simulate dart hit
+      </div>
+      <canvas id="debugCanvas" width="300" height="300" style="border:2px solid var(--border);border-radius:8px;cursor:crosshair;background:#111"></canvas>
+      <div id="debugInfo" style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:8px"></div>
+      <button class="btn btn-dim" onclick="resetDebugHits()" style="margin-top:8px;color:var(--red);border-color:var(--red)">RESET</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Safe DOM helper — returns element or a no-op proxy
+function $(id) {
+  const el = document.getElementById(id);
+  if (el) return el;
+  // Return proxy that silently absorbs property sets
+  return new Proxy({style:{},classList:{add:()=>{},remove:()=>{},contains:()=>false}}, {
+    set: () => true,
+    get: (t, k) => {
+      if (k === 'style') return t.style;
+      if (k === 'classList') return t.classList;
+      if (typeof t[k] === 'function') return t[k];
+      return undefined;
+    }
+  });
+}
+
+// ─── Config ───
+const SUPABASE_URL = 'https://bcjaywyarbrqnldxssmp.snapcloud.dev';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjamF5d3lhcmJycW5sZHhzc21wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzA2NDEsImV4cCI6MjA5MTE0NjY0MX0.dMspq6TMxZv8-fGDk2uqtYlUDpZxPlNZzqli3sp82B4';
+const WINS=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const SEG=[20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5];
+const HEADERS={'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=representation'};
+
+// ─── Step-by-step Calibration ───
+let calibrationMatrix = null;
+let calStep = 0;
+let calPoints = {};
+let calCenter = null;
+let lockedCenter = null;
+let lastRawDart = null;
+let lastTipDart = null;
+let debugMode = false;
+
+function tapBoardCenter(event) {
+  const overlay = $('overlay');
+  const rect = overlay.getBoundingClientRect();
+  const tapX = (event.clientX - rect.left) / rect.width * vW;
+  const tapY = (event.clientY - rect.top) / rect.height * vH;
+  lockedCenter = {x: tapX, y: tapY};
+  $('hint').textContent = 'Board center locked!';
+  console.log('[Tap] Center at', tapX.toFixed(0), tapY.toFixed(0));
+}
+
+function toggleSettings() {
+  const tb = $('toolbar');
+  tb.classList.toggle('show');
+}
+
+function toggleDebug() {
+  debugMode = !debugMode;
+  const btn = $('debugBtn');
+  const db = $('debugBoard');
+  if (debugMode) {
+    btn.style.background = '#ff69b4';
+    btn.style.color = 'var(--bg)';
+    btn.textContent = 'DEBUG ON';
+    db.style.display = 'block';
+    drawDebugBoard();
+    $('debugCanvas').onclick = debugBoardClick;
+  } else {
+    btn.style.background = 'var(--surface)';
+    btn.style.color = '#ff69b4';
+    btn.textContent = 'DEBUG';
+    db.style.display = 'none';
+  }
+}
+
+function drawDebugBoard() {
+  const c = $('debugCanvas');
+  const ctx = c.getContext('2d');
+  const w = c.width, h = c.height;
+  const cw = w / 3, ch = h / 3;
+
+  // Background — draw dartboard circle
+  ctx.fillStyle = '#111';
+  ctx.fillRect(0, 0, w, h);
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(w/2, h/2, w/2 - 10, 0, Math.PI*2); ctx.stroke();
+
+  // Dartboard rings
+  const cx = w/2, cy = h/2, r = w/2 - 10;
+  const SEG_D = [20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5];
+  for (let i = 0; i < 20; i++) {
+    const a1 = (i*18-9-90)*Math.PI/180;
+    const a2 = ((i+1)*18-9-90)*Math.PI/180;
+    const even = i % 2 === 0;
+    // Double
+    ctx.fillStyle = even ? '#1a6b3a' : '#8b1a1a';
+    ctx.beginPath(); ctx.arc(cx,cy,r,a1,a2); ctx.arc(cx,cy,r*0.88,a2,a1,true); ctx.closePath(); ctx.fill();
+    // Outer single
+    ctx.fillStyle = even ? '#1a1a25' : '#d4c9a8';
+    ctx.beginPath(); ctx.arc(cx,cy,r*0.88,a1,a2); ctx.arc(cx,cy,r*0.63,a2,a1,true); ctx.closePath(); ctx.fill();
+    // Triple
+    ctx.fillStyle = even ? '#1a6b3a' : '#8b1a1a';
+    ctx.beginPath(); ctx.arc(cx,cy,r*0.63,a1,a2); ctx.arc(cx,cy,r*0.57,a2,a1,true); ctx.closePath(); ctx.fill();
+    // Inner single
+    ctx.fillStyle = even ? '#1a1a25' : '#d4c9a8';
+    ctx.beginPath(); ctx.arc(cx,cy,r*0.57,a1,a2); ctx.arc(cx,cy,r*0.1,a2,a1,true); ctx.closePath(); ctx.fill();
+  }
+  // Bull
+  ctx.fillStyle = '#1a6b3a'; ctx.beginPath(); ctx.arc(cx,cy,r*0.1,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#8b1a1a'; ctx.beginPath(); ctx.arc(cx,cy,r*0.04,0,Math.PI*2); ctx.fill();
+
+  // Segment lines
+  ctx.strokeStyle = '#00000066'; ctx.lineWidth = 0.5;
+  for (let i = 0; i < 20; i++) {
+    const a = (i*18-9-90)*Math.PI/180;
+    ctx.beginPath(); ctx.moveTo(cx+Math.cos(a)*r*0.1,cy+Math.sin(a)*r*0.1);
+    ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r); ctx.stroke();
+  }
+
+  // Numbers
+  ctx.fillStyle = '#ffffffaa'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  for (let i = 0; i < 20; i++) {
+    const a = (i*18-90)*Math.PI/180;
+    ctx.fillText(''+SEG_D[i], cx+Math.cos(a)*(r+0), cy+Math.sin(a)*(r+0));
+  }
+
+  // Ring labels
+  ctx.fillStyle = '#ffffff33'; ctx.font = '8px sans-serif';
+  ctx.fillText('D', cx, cy - r*0.94);
+  ctx.fillText('T', cx, cy - r*0.60);
+  ctx.fillText('S', cx, cy - r*0.75);
+}
+
+let debugHits = []; // {x, y, zone}
+
+async function debugBoardClick(event) {
+  const c = $('debugCanvas');
+  const rect = c.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  const cx = c.width / 2, cy = c.height / 2;
+  const r = c.width / 2 - 10;
+
+  // Normalize to -1..1 from center
+  const nx = (x - cx) / r;
+  const ny = (y - cy) / r;
+  const dist = Math.hypot(nx, ny);
+
+  // Angle → segment number
+  let angle = Math.atan2(nx, -ny) * 180 / Math.PI;
+  if (angle < 0) angle += 360;
+  let segAngle = angle + 9;
+  if (segAngle >= 360) segAngle -= 360;
+  const segNum = SEG[Math.floor(segAngle / 18)];
+
+  // Distance → zone
+  let zone;
+  if (dist <= 0.037) zone = 'Bullseye';
+  else if (dist <= 0.094) zone = 'Outer Bull';
+  else if (dist <= 0.582) zone = 'Single ' + segNum;
+  else if (dist <= 0.629) zone = 'Triple ' + segNum;
+  else if (dist <= 0.953) zone = 'Single ' + segNum;
+  else if (dist <= 1.02) zone = 'Double ' + segNum;
+  else zone = 'Miss';
+
+  const gridX = (nx + 1) / 2;
+  const gridY = (ny + 1) / 2;
+  const col = Math.min(2, Math.floor(gridX * 3));
+  const row = Math.min(2, Math.floor(gridY * 3));
+  const cell = row * 3 + col;
+
+  const zoneWithPos = zone + ',' + gridX.toFixed(4) + ',' + gridY.toFixed(4);
+
+  // Send to Supabase
+  if (gameId) {
+    await sbInsert('dart_throws', {
+      game_id: gameId, player: currentPlayer, trigger_type: 'debug',
+      cell: cell, zone: zoneWithPos, status: 'done'
+    });
+  }
+
+  // Store hit + redraw with all dots
+  debugHits.push({x, y, zone});
+  drawDebugHits();
+
+  $('debugInfo').textContent =
+    zone + ' (d=' + dist.toFixed(2) + ')  |  Hits: ' + debugHits.length;
+
+  console.log('[Debug] ' + zone + ' at (' + gridX.toFixed(3) + ',' + gridY.toFixed(3) + ')');
+}
+
+// Preload dart marker image
+const dartMarkerImg = new Image();
+dartMarkerImg.src = 'assets/dart-marker.png';
+let dartMarkerLoaded = false;
+dartMarkerImg.onload = () => { dartMarkerLoaded = true; };
+
+function drawDebugHits() {
+  drawDebugBoard();
+  const c = $('debugCanvas');
+  const ctx = c.getContext('2d');
+
+  for (let i = 0; i < debugHits.length; i++) {
+    const h = debugHits[i];
+    const isLatest = (i === debugHits.length - 1);
+    const size = isLatest ? 28 : 22;
+
+    if (dartMarkerLoaded) {
+      // Draw dart marker image centered on hit point
+      ctx.drawImage(dartMarkerImg, h.x - size/2, h.y - size/2, size, size);
+    } else {
+      // Fallback red dot if image not loaded
+      ctx.beginPath();
+      ctx.arc(h.x, h.y, isLatest ? 7 : 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#a8c11e';
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    // Label latest hit only
+    if (isLatest) {
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 3;
+      ctx.strokeText(h.zone, h.x + size/2 + 4, h.y - 5);
+      ctx.fillText(h.zone, h.x + size/2 + 4, h.y - 5);
+    }
+  }
+}
+
+async function resetDebugHits() {
+  debugHits = [];
+  drawDebugBoard();
+  $('debugInfo').textContent = 'Cleared';
+
+  // Send reset signal to Spectacles via Supabase
+  if (gameId) {
+    try {
+      await sbInsert('dart_throws', {
+        game_id: gameId, player: 0, trigger_type: 'reset',
+        cell: -1, zone: 'RESET,0,0', status: 'done'
+      });
+      console.log('[Debug] Reset sent to Spectacles');
+    } catch(e) {
+      console.warn('[Debug] Reset failed:', e);
+    }
+  }
+}
+
+function runCalibration() {
+  if (calStep > 0) {
+    detectCalibrationDart();
+    return;
+  }
+  calStep = 1;
+  calPoints = {};
+  calibrationMatrix = null;
+  $('hint').textContent = 'Place dart at DOUBLE 20 (top). Press button.';
+  $('calBtn').textContent = 'D20 ↑';
+  $('calBtn').style.background = '#ffd700';
+  $('calBtn').style.color = 'var(--bg)';
+}
+
+function detectCalibrationDart() {
+  if (!cvReady) return;
+
+  const v = $('video');
+  const c = document.createElement('canvas');
+  c.width = vW; c.height = vH;
+  c.getContext('2d').drawImage(v, 0, 0);
+
+  const src = cv.imread(c);
+  const rgb = new cv.Mat(); cv.cvtColor(src, rgb, cv.COLOR_RGBA2RGB);
+  const hsv = new cv.Mat(); cv.cvtColor(rgb, hsv, cv.COLOR_RGB2HSV);
+
+  // Find largest yellow blob
+  const hueC = parseInt($('hueCenter').value);
+  const hueR = parseInt($('hueRange').value);
+  const satMin = parseInt($('satMin').value);
+  const yLo = new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[Math.max(0,hueC-hueR),satMin,60,0]);
+  const yHi = new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[Math.min(179,hueC+hueR),255,255,255]);
+  const yM = new cv.Mat(); cv.inRange(hsv,yLo,yHi,yM);
+  const k2 = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(5,5));
+  cv.morphologyEx(yM,yM,cv.MORPH_CLOSE,k2);
+  cv.morphologyEx(yM,yM,cv.MORPH_OPEN,k2);
+  const yC = new cv.MatVector(); const yH = new cv.Mat();
+  cv.findContours(yM,yC,yH,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE);
+
+  let bestBlob = null, bestArea = 0;
+  for (let i = 0; i < yC.size(); i++) {
+    const a = cv.contourArea(yC.get(i));
+    if (a > bestArea) {
+      const m = cv.moments(yC.get(i));
+      if (m.m00 > 0) { bestArea = a; bestBlob = {x: m.m10/m.m00, y: m.m01/m.m00}; }
+    }
+  }
+
+  src.delete();rgb.delete();hsv.delete();yLo.delete();yHi.delete();yM.delete();k2.delete();yC.delete();yH.delete();
+
+  if (!bestBlob) {
+    $('hint').textContent = 'No dart found! Try again.';
+    return;
+  }
+
+  if (calStep === 1) {
+    calPoints.d20 = bestBlob;
+    console.log('[Cal] D20:', bestBlob.x.toFixed(0), bestBlob.y.toFixed(0));
+    $('hint').textContent = 'D20 ✓ Now place dart at DOUBLE 6 (right)';
+    $('calBtn').textContent = 'D6 →';
+    calStep = 2;
+  } else if (calStep === 2) {
+    calPoints.d6 = bestBlob;
+    console.log('[Cal] D6:', bestBlob.x.toFixed(0), bestBlob.y.toFixed(0));
+    $('hint').textContent = 'D6 ✓ Now place dart at DOUBLE 3 (bottom)';
+    $('calBtn').textContent = 'D3 ↓';
+    calStep = 3;
+  } else if (calStep === 3) {
+    calPoints.d3 = bestBlob;
+    console.log('[Cal] D3:', bestBlob.x.toFixed(0), bestBlob.y.toFixed(0));
+    $('hint').textContent = 'D3 ✓ Now place dart at DOUBLE 11 (left)';
+    $('calBtn').textContent = 'D11 ←';
+    calStep = 4;
+  } else if (calStep === 4) {
+    calPoints.d11 = bestBlob;
+    console.log('[Cal] D11:', bestBlob.x.toFixed(0), bestBlob.y.toFixed(0));
+
+    // 4 known doubles → 4 points on a circle
+    // Doubles center is at 97.6% of board scoring radius
+    // (midpoint of double wire: 166mm, board edge: 170mm)
+    const D = 97.6;
+    const srcPts = cv.matFromArray(4, 1, cv.CV_32FC2, [
+      calPoints.d20.x, calPoints.d20.y,
+      calPoints.d6.x, calPoints.d6.y,
+      calPoints.d3.x, calPoints.d3.y,
+      calPoints.d11.x, calPoints.d11.y
+    ]);
+    const dstPts = cv.matFromArray(4, 1, cv.CV_32FC2, [
+      100, 100 - D,    // D20 → top
+      100 + D, 100,    // D6 → right
+      100, 100 + D,    // D3 → bottom
+      100 - D, 100     // D11 → left
+    ]);
+    calibrationMatrix = cv.getPerspectiveTransform(srcPts, dstPts);
+    srcPts.delete(); dstPts.delete();
+
+    calStep = 0;
+    $('hint').textContent = 'Calibrated! Remove darts and play.';
+    $('calBtn').textContent = 'RECAL';
+    $('calBtn').style.background = '#00e68a';
+    console.log('[Cal] 4-point calibration done!');
+
+    // Auto-start continuous detection
+    if (!autoRunning) toggleAuto();
+  }
+}
+
+// Raw fetch helpers for Supabase REST API
+async function sbSelect(table, query='') {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, {headers:HEADERS});
+  return r.json();
+}
+async function sbInsert(table, row) {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {method:'POST',headers:HEADERS,body:JSON.stringify(row)});
+  return r.json();
+}
+async function sbUpdate(table, query, updates) {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, {method:'PATCH',headers:HEADERS,body:JSON.stringify(updates)});
+  return r.json();
+}
+
+let mode = null;
+let gameId = null, gameCode = null;
+let board = [0,0,0,0,0,0,0,0,0];
+let currentPlayer = 1, winsX = 0, winsO = 0;
+let pollInterval = null;
+let vW = 0, vH = 0;
+let cvReady = false;
+
+// ─── Lobby ───
+function selectMode(m) {
+  mode = m;
+  $('modeRecorder').classList.toggle('active', m==='recorder');
+  $('modePlayer').classList.toggle('active', m==='player');
+}
+
+async function createGame() {
+  if (!mode) { alert('Pick a role first!'); return; }
+  gameCode = Math.random().toString(36).substring(2, 6).toUpperCase();
+  try {
+    const data = await sbInsert('dart_games', { code: gameCode });
+    if (!data || !data[0]) { alert('Error creating game'); return; }
+    gameId = data[0].id;
+    startGame();
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function joinGame() {
+  if (!mode) { alert('Pick a role first!'); return; }
+  gameCode = $('codeInput').value.toUpperCase().trim();
+  if (gameCode.length < 2) { alert('Enter a game code'); return; }
+  try {
+    const data = await sbSelect('dart_games', `code=eq.${gameCode}&status=eq.playing&order=created_at.desc&limit=1`);
+    if (!data || !data[0]) { alert('Game not found'); return; }
+    gameId = data[0].id;
+    board = data[0].board;
+    currentPlayer = data[0].current_player;
+    startGame();
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+function startGame() {
+  $('lobby').style.display = 'none';
+  $('game').classList.add('show');
+  $('gameCodeLabel').textContent = `Game: ${gameCode}`;
+  $('connBadge').textContent = mode.toUpperCase();
+  $('connBadge').style.color = mode==='recorder'?'var(--gold)':'var(--accent)';
+  $('connBadge').style.borderColor = mode==='recorder'?'var(--gold)':'var(--accent)';
+
+  if (mode === 'recorder') {
+    $('viewArea').style.display = 'block';
+    $('boardGrid').style.display = 'none';
+    $('hint').textContent = 'Calibrate to start auto detection';
+    initCam();
+    startRecorderPolling();
+  } else {
+    $('viewArea').style.display = 'none';
+    $('boardGrid').classList.add('show');
+    $('toolbar').classList.remove('show');
+    renderPlayerBoard();
+    startPlayerPolling();
+  }
+  updateTurn();
+}
+
+function leaveGame() {
+  if (pollInterval) clearInterval(pollInterval);
+  gameId = null; gameCode = null; mode = null;
+  board = [0,0,0,0,0,0,0,0,0]; currentPlayer = 1;
+  $('lobby').style.display = 'flex';
+  $('game').classList.remove('show');
+  $('winBanner').classList.remove('show');
+  $('modeRecorder').classList.remove('active');
+  $('modePlayer').classList.remove('active');
+  $('connBadge').textContent = 'OFFLINE';
+}
+
+// ─── Player Mode ───
+async function triggerThrow() {
+  $('mainBtn').disabled = true;
+  $('waitText').style.display = 'block';
+  $('waitText').textContent = 'Dart thrown! Detecting...';
+  try {
+    await sbInsert('dart_throws', { game_id: gameId, player: currentPlayer, trigger_type: 'detect', status: 'pending' });
+  } catch(e) { console.error('Throw trigger error:', e); }
+}
+
+function startPlayerPolling() {
+  pollInterval = setInterval(async () => {
+    try {
+      const data = await sbSelect('dart_games', `id=eq.${gameId}`);
+      if (!data || !data[0]) return;
+      const g = data[0];
+      const changed = JSON.stringify(g.board) !== JSON.stringify(board);
+      board = g.board;
+      currentPlayer = g.current_player;
+      if (changed) {
+        $('mainBtn').disabled = false;
+        $('waitText').style.display = 'none';
+        renderPlayerBoard();
+        updateTurn();
+        const w = checkWin();
+        if (w || board.every(c => c !== 0)) showWin(w);
+      }
+    } catch(e) { console.warn('[Poll]', e); }
+  }, 1000);
+}
+
+function renderPlayerBoard() {
+  const g = $('grid');
+  g.innerHTML = '';
+  for (let i = 0; i < 9; i++) {
+    const d = document.createElement('div');
+    d.className = 'cell';
+    if (board[i] === 1) { d.classList.add('x'); d.textContent = 'X'; }
+    else if (board[i] === 2) { d.classList.add('o'); d.textContent = 'O'; }
+    g.appendChild(d);
+  }
+}
+
+// ─── Recorder Mode ───
+async function initCam() {
+  const s = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 960 } }
+  });
+  const v = $('video');
+  v.srcObject = s;
+  await new Promise(r => v.addEventListener('loadedmetadata', r));
+  vW = v.videoWidth; vH = v.videoHeight;
+}
+
+function startRecorderPolling() {
+  pollInterval = setInterval(async () => {
+    try {
+      const data = await sbSelect('dart_throws', `game_id=eq.${gameId}&status=eq.pending&order=created_at.asc&limit=1`);
+      if (data && data.length > 0) {
+        console.log('[Recorder] Got throw trigger:', data[0].id);
+        $('hint').textContent = 'Throw detected! Scanning...';
+        setTimeout(() => detectAndRespond(data[0]), 500);
+      }
+    } catch(e) { console.warn('[RecPoll]', e); }
+  }, 1000);
+}
+
+async function detectAndRespond(throwRow) {
+  if (!cvReady) {
+    toast('OPENCV NOT READY', 'Wait for OpenCV to load', true);
+    return;
+  }
+
+  const result = runDetection();
+
+  if (result.cell >= 0) {
+    // Update throw
+    await sbUpdate('dart_throws', `id=eq.${throwRow.id}`, { cell: result.cell, zone: result.zone, status: 'done' });
+
+    // Update game board
+    board[result.cell] = throwRow.player;
+    const w = checkWin();
+    const nextPlayer = throwRow.player === 1 ? 2 : 1;
+
+    await sbUpdate('dart_games', `id=eq.${gameId}`, {
+      board: board,
+      current_player: nextPlayer,
+      winner: w || 0,
+      status: w || board.every(c => c !== 0) ? 'finished' : 'playing',
+      updated_at: new Date().toISOString()
+    });
+
+    currentPlayer = nextPlayer;
+    updateTurn();
+    toast(`P${throwRow.player} → Cell ${result.cell + 1}`, result.zone, false);
+  } else {
+    // Failed detection
+    await sbUpdate('dart_throws', `id=eq.${throwRow.id}`, { status: 'failed', zone: result.reason || 'detection failed' });
+    toast('MISS', result.reason || 'No dart detected', true);
+  }
+
+  $('hint').textContent = 'Waiting for throw...';
+}
+
+// Manual detect (for testing recorder without player trigger)
+async function sendCurrentDart() {
+  if (!cvReady) { toast('OPENCV NOT READY', '', true); return; }
+  if (!gameId) { toast('NOT IN GAME', 'Join a game first', true); return; }
+
+  const result = runDetection();
+  if (result.cell < 0) {
+    toast('NO DART', result.reason || 'Place a dart visible on the board', true);
+    return;
+  }
+
+  // Send directly as done - Spectacles will pick it up
+  try {
+    await sbInsert('dart_throws', {
+      game_id: gameId,
+      player: currentPlayer,
+      trigger_type: 'manual',
+      cell: result.cell,
+      zone: result.zone,
+      status: 'done'
+    });
+    const zoneName = result.zone.split(',')[0];
+    toast(zoneName, 'Sent to Spectacles', false);
+    console.log('[Send] ' + result.zone);
+  } catch(e) {
+    toast('SEND FAILED', e.message, true);
+    console.warn('[Send] Error:', e);
+  }
+}
+
+function manualDetect() {
+  if (!cvReady) { toast('OPENCV NOT READY', '', true); return; }
+  const result = runDetection();
+  if (result.cell >= 0) {
+    toast('DETECTED', result.zone.split(',')[0], false);
+  } else {
+    toast('NO DART', result.reason, true);
+  }
+}
+
+async function updateGameInSupabase() {
+  const w = checkWin();
+  const nextPlayer = currentPlayer === 1 ? 2 : 1;
+  await sbUpdate('dart_games', `id=eq.${gameId}`, {
+    board: board,
+    current_player: nextPlayer,
+    winner: w || 0,
+    status: w || board.every(c => c !== 0) ? 'finished' : 'playing',
+    updated_at: new Date().toISOString()
+  });
+}
+
+// ─── OpenCV Detection (red+green board, blue dart) ───
+function runDetection() {
+  let src=null,rgb=null,hsv=null,redMask1=null,redMask2=null,greenMask=null;
+  let boardColorMask=null,blueMask=null,blueLow=null,blueHigh=null;
+  let kernel=null,boardMasked=null,contours=null,hier=null;
+
+  try {
+    const v = $('video');
+    const c = document.createElement('canvas');
+    c.width=vW; c.height=vH;
+    c.getContext('2d').drawImage(v,0,0);
+    const t0 = performance.now();
+
+    src=cv.imread(c);
+    rgb=new cv.Mat(); cv.cvtColor(src,rgb,cv.COLOR_RGBA2RGB);
+    hsv=new cv.Mat(); cv.cvtColor(rgb,hsv,cv.COLOR_RGB2HSV);
+
+    // Red mask
+    const rL1=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[0,70,50,0]);
+    const rH1=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[10,255,255,255]);
+    redMask1=new cv.Mat(); cv.inRange(hsv,rL1,rH1,redMask1);
+    const rL2=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[170,70,50,0]);
+    const rH2=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[179,255,255,255]);
+    redMask2=new cv.Mat(); cv.inRange(hsv,rL2,rH2,redMask2);
+    const redMask=new cv.Mat(); cv.bitwise_or(redMask1,redMask2,redMask);
+
+    // Green mask
+    const gL=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[35,70,50,0]);
+    const gH=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[85,255,255,255]);
+    greenMask=new cv.Mat(); cv.inRange(hsv,gL,gH,greenMask);
+
+    boardColorMask=new cv.Mat(); cv.bitwise_or(redMask,greenMask,boardColorMask);
+
+    // If center is locked, only detect board near it
+    if (lockedCenter) {
+      const lockMask = cv.Mat.zeros(boardColorMask.rows, boardColorMask.cols, cv.CV_8U);
+      const lockR = Math.round(Math.max(boardColorMask.cols, boardColorMask.rows) * 0.35);
+      cv.circle(lockMask, new cv.Point(lockedCenter.x, lockedCenter.y), lockR, new cv.Scalar(255), -1);
+      cv.bitwise_and(boardColorMask, lockMask, boardColorMask);
+      lockMask.delete();
+    }
+
+    kernel=cv.getStructuringElement(cv.MORPH_ELLIPSE,new cv.Size(9,9));
+    cv.morphologyEx(boardColorMask,boardColorMask,cv.MORPH_CLOSE,kernel);
+    cv.morphologyEx(boardColorMask,boardColorMask,cv.MORPH_OPEN,kernel);
+
+    const boardPx=cv.countNonZero(boardColorMask);
+    if(boardPx<500){
+      showMask(boardColorMask,'BOARD');
+      rL1.delete();rH1.delete();rL2.delete();rH2.delete();gL.delete();gH.delete();redMask.delete();
+      cleanup();
+      return{cell:-1,reason:`No board (${boardPx}px r+g)`};
+    }
+
+    // Board shape from red+green
+    const bCnt=new cv.MatVector();const bH=new cv.Mat();
+    cv.findContours(boardColorMask,bCnt,bH,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE);
+    let pts=[];
+    for(let i=0;i<bCnt.size();i++){const cnt=bCnt.get(i);for(let j=0;j<cnt.rows;j++){pts.push(cnt.data32S[j*2],cnt.data32S[j*2+1]);}}
+    const pMat=cv.matFromArray(pts.length/2,1,cv.CV_32SC2,pts);
+
+    // Fit ellipse (handles angled views) with circle fallback
+    let bcx, bcy, semiW, semiH, boardAngle=0, br;
+    if (pts.length >= 10) {
+      try {
+        const ellipse = cv.fitEllipse(pMat);
+        bcx = ellipse.center.x;
+        bcy = ellipse.center.y;
+        semiW = ellipse.size.width / 2;
+        semiH = ellipse.size.height / 2;
+        boardAngle = ellipse.angle;
+        br = Math.max(semiW, semiH);
+        console.log(`[Board] Ellipse center(${bcx.toFixed(0)},${bcy.toFixed(0)}) axes(${semiW.toFixed(0)},${semiH.toFixed(0)}) angle=${boardAngle.toFixed(1)}°`);
+      } catch(e) {
+        const circle = cv.minEnclosingCircle(pMat);
+        bcx=circle.center.x; bcy=circle.center.y; br=circle.radius;
+        semiW=br; semiH=br; boardAngle=0;
+        console.log('[Board] Ellipse failed, using circle r=' + br.toFixed(0));
+      }
+    } else {
+      const circle = cv.minEnclosingCircle(pMat);
+      bcx=circle.center.x; bcy=circle.center.y; br=circle.radius;
+      semiW=br; semiH=br; boardAngle=0;
+    }
+    pMat.delete();bCnt.delete();bH.delete();
+
+    // Find bullseye for precise center — small red blob near ellipse center
+    const bullMask = new cv.Mat();
+    const bullKernel = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(3,3));
+    const centerMask = cv.Mat.zeros(redMask.rows, redMask.cols, cv.CV_8U);
+    cv.circle(centerMask, new cv.Point(bcx, bcy), Math.round(br * 0.15), new cv.Scalar(255), -1);
+    cv.bitwise_and(redMask, centerMask, bullMask);
+    cv.morphologyEx(bullMask, bullMask, cv.MORPH_OPEN, bullKernel);
+    
+    const bullCnt = new cv.MatVector();
+    const bullH = new cv.Mat();
+    cv.findContours(bullMask, bullCnt, bullH, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+    
+    if (bullCnt.size() > 0) {
+      let bestBull = -1, bestBullArea = 0;
+      for (let i = 0; i < bullCnt.size(); i++) {
+        const a = cv.contourArea(bullCnt.get(i));
+        if (a > bestBullArea) { bestBullArea = a; bestBull = i; }
+      }
+      if (bestBull >= 0 && bestBullArea > 10) {
+        const bm = cv.moments(bullCnt.get(bestBull));
+        if (bm.m00 > 0) {
+          bcx = bm.m10 / bm.m00;
+          bcy = bm.m01 / bm.m00;
+          console.log(`[Board] Bullseye center: (${bcx.toFixed(0)}, ${bcy.toFixed(0)})`);
+        }
+      }
+    }
+    bullMask.delete(); centerMask.delete(); bullKernel.delete(); bullCnt.delete(); bullH.delete();
+
+    // Find 4 extreme points of board mask in IMAGE space
+    // Topmost/rightmost/etc pixels correctly correspond to board edge positions
+    let topPt={x:bcx,y:99999}, botPt={x:bcx,y:0}, leftPt={x:99999,y:bcy}, rightPt={x:0,y:bcy};
+    const maskData = boardColorMask.data;
+    for (let y = 0; y < boardColorMask.rows; y += 2) {
+      for (let x = 0; x < boardColorMask.cols; x += 2) {
+        if (maskData[y * boardColorMask.cols + x] > 0) {
+          if (y < topPt.y) topPt = {x, y};
+          if (y > botPt.y) botPt = {x, y};
+          if (x < leftPt.x) leftPt = {x, y};
+          if (x > rightPt.x) rightPt = {x, y};
+        }
+      }
+    }
+
+    br = Math.max(semiW, semiH);
+
+    // Build perspective transform: 4 image extremes → perfect circle
+    const srcPts = cv.matFromArray(4, 1, cv.CV_32FC2, [
+      topPt.x, topPt.y,
+      rightPt.x, rightPt.y,
+      botPt.x, botPt.y,
+      leftPt.x, leftPt.y
+    ]);
+    const dstPts = cv.matFromArray(4, 1, cv.CV_32FC2, [
+      100, 0,
+      200, 100,
+      100, 200,
+      0, 100
+    ]);
+    const perspMat = cv.getPerspectiveTransform(srcPts, dstPts);
+    srcPts.delete(); dstPts.delete();
+
+    console.log(`[Board] Extremes T(${topPt.x},${topPt.y}) R(${rightPt.x},${rightPt.y}) B(${botPt.x},${botPt.y}) L(${leftPt.x},${leftPt.y}) r=${br.toFixed(0)}`);
+
+    rL1.delete();rH1.delete();rL2.delete();rH2.delete();gL.delete();gH.delete();redMask.delete();
+
+    showMask(boardColorMask,'BOARD');
+
+    // Blue mask
+    const hueC=parseInt($('hueCenter').value);
+    const hueR=parseInt($('hueRange').value);
+    const satMin=parseInt($('satMin').value);
+    const bLo=Math.max(0,hueC-hueR),bHi=Math.min(179,hueC+hueR);
+
+    blueLow=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[bLo,satMin,60,0]);
+    blueHigh=new cv.Mat(hsv.rows,hsv.cols,hsv.type(),[bHi,255,255,255]);
+    blueMask=new cv.Mat(); cv.inRange(hsv,blueLow,blueHigh,blueMask);
+
+    const k2=cv.getStructuringElement(cv.MORPH_ELLIPSE,new cv.Size(5,5));
+    cv.morphologyEx(blueMask,blueMask,cv.MORPH_CLOSE,k2);
+    cv.morphologyEx(blueMask,blueMask,cv.MORPH_OPEN,k2); k2.delete();
+
+    // Mask blue to board area — generous circle including outer ring and numbers
+    const brdMsk=cv.Mat.zeros(blueMask.rows,blueMask.cols,cv.CV_8U);
+    cv.circle(brdMsk, new cv.Point(bcx,bcy), Math.round(br*1.5), new cv.Scalar(255), -1);
+    boardMasked=new cv.Mat(); cv.bitwise_and(blueMask,brdMsk,boardMasked); brdMsk.delete();
+
+    contours=new cv.MatVector(); hier=new cv.Mat();
+    cv.findContours(boardMasked,contours,hier,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE);
+    const totalBlue=cv.countNonZero(boardMasked);
+    const ms=(performance.now()-t0).toFixed(0);
+
+    $('infoLine').textContent=`Ellipse ${semiW.toFixed(0)}x${semiH.toFixed(0)} ${boardAngle.toFixed(0)}° | ${totalBlue}px blue | ${ms}ms`;
+
+    if(contours.size()===0||totalBlue<20){
+      drawOverlay(bcx,bcy,br,null,semiW,semiH,0,0,0);
+      cleanup(); return{cell:-1,reason:`No blue (${totalBlue}px)`};
+    }
+
+    let bestIdx=-1,bestArea=0;
+    for(let i=0;i<contours.size();i++){
+      const a=cv.contourArea(contours.get(i));
+      if(a>=20&&a>bestArea){bestArea=a;bestIdx=i;}
+    }
+    if(bestIdx===-1){cleanup();return{cell:-1,reason:'Blue too small'};}
+
+    const M=cv.moments(contours.get(bestIdx));
+    const rawBx=M.m10/M.m00, rawBy=M.m01/M.m00;
+    let bx=rawBx, by=rawBy;
+
+    // ─── TIP OFFSET: only when NOT calibrated ───
+    // Calibration learned from raw tape position, so detection should also use raw tape position.
+    const tipPx = calibrationMatrix ? 0 : (parseInt($('tipOffset').value) || 0);
+    if (tipPx > 0) {
+      const dartDist = Math.hypot(bx - bcx, by - bcy);
+      if (dartDist > tipPx) {
+        const scale = (dartDist - tipPx) / dartDist;
+        bx = bcx + (bx - bcx) * scale;
+        by = bcy + (by - bcy) * scale;
+      }
+    }
+    lastRawDart = {x: rawBx, y: rawBy};
+    lastTipDart = {x: bx, y: by};
+
+    // ─── COLOR-BASED ZONE DETECTION ───
+    // Use calibration matrix if available, otherwise auto-detected perspective
+    const dx=bx-bcx, dy=by-bcy;
+    
+    const useMatrix = calibrationMatrix ? calibrationMatrix : perspMat;
+    const dartSrc = cv.matFromArray(1, 1, cv.CV_32FC2, [bx, by]);
+    const dartDst = new cv.Mat();
+    cv.perspectiveTransform(dartSrc, dartDst, useMatrix);
+    const corrX = dartDst.data32F[0];
+    const corrY = dartDst.data32F[1];
+    dartSrc.delete(); dartDst.delete(); perspMat.delete();
+    
+    // Normalize to -1..1 (center at 100,100, radius 100)
+    const nx = (corrX - 100) / 100;
+    const ny = (corrY - 100) / 100;
+    
+    let angle=Math.atan2(nx,-ny)*180/Math.PI; if(angle<0)angle+=360;
+    let segAngle=angle+9; if(segAngle>=360)segAngle-=360;
+    const segNum = SEG[Math.floor(segAngle/18)];
+
+    // Distance using perspective-corrected coordinates
+    const rawDist = Math.hypot(nx, ny);
+
+    // Sample colors around dart position (ring of pixels, skip the blue tape)
+    const sampleR1 = 8;  // inner sample radius
+    const sampleR2 = 18; // outer sample radius
+    let redCount=0, greenCount=0, darkCount=0, lightCount=0, totalSamples=0;
+
+    for(let sy=-sampleR2; sy<=sampleR2; sy+=2){
+      for(let sx=-sampleR2; sx<=sampleR2; sx+=2){
+        const dist=Math.hypot(sx,sy);
+        if(dist<sampleR1 || dist>sampleR2) continue; // ring only, skip center (blue tape)
+
+        const px=Math.round(bx+sx), py=Math.round(by+sy);
+        if(px<0||py<0||px>=hsv.cols||py>=hsv.rows) continue;
+
+        // Only sample inside the board
+        const distFromCenter = Math.hypot(px-bcx, py-bcy);
+        if(distFromCenter > br * 1.0) continue;
+
+        const h=hsv.ucharPtr(py,px)[0];
+        const s=hsv.ucharPtr(py,px)[1];
+        const v=hsv.ucharPtr(py,px)[2];
+
+        totalSamples++;
+
+        // Classify pixel
+        if(s>60 && ((h<10)||(h>165))) redCount++;       // Red hue
+        else if(s>60 && h>35 && h<85) greenCount++;     // Green hue
+        else if(v<70) darkCount++;                       // Black
+        else if(v>130 && s<80) lightCount++;             // Cream/white
+      }
+    }
+
+    // Determine zone
+    let zone;
+    const colorTotal = redCount+greenCount+darkCount+lightCount;
+    const redPct = colorTotal>0 ? redCount/colorTotal : 0;
+    const greenPct = colorTotal>0 ? greenCount/colorTotal : 0;
+    const darkPct = colorTotal>0 ? darkCount/colorTotal : 0;
+    const lightPct = colorTotal>0 ? lightCount/colorTotal : 0;
+
+    if (calibrationMatrix) {
+      // ─── CALIBRATED: use exact distance thresholds ───
+      if (rawDist <= 0.037) zone = 'Bullseye';
+      else if (rawDist <= 0.094) zone = 'Outer Bull';
+      else if (rawDist <= 0.582) zone = 'Single ' + segNum;
+      else if (rawDist <= 0.629) zone = 'Triple ' + segNum;
+      else if (rawDist <= 0.953) zone = 'Single ' + segNum;
+      else if (rawDist <= 1.02) zone = 'Double ' + segNum;
+      else zone = 'Miss';
+    } else {
+      // ─── UNCALIBRATED: auto-perspective from color mask ───
+      if (rawDist <= 0.037) zone = 'Bullseye';
+      else if (rawDist <= 0.094) zone = 'Outer Bull';
+      else if (rawDist <= 0.582) zone = 'Single ' + segNum;
+      else if (rawDist <= 0.629) zone = 'Triple ' + segNum;
+      else if (rawDist <= 0.953) zone = 'Single ' + segNum;
+      else if (rawDist <= 1.02) zone = 'Double ' + segNum;
+      else zone = 'Miss';
+    }
+
+    console.log(`[Dart] seg=${segNum} dist=${rawDist.toFixed(3)} cal=${!!calibrationMatrix} → ${zone}`);
+    $('infoLine').textContent=`${zone} | d=${rawDist.toFixed(2)} | ${calibrationMatrix?'CAL':'AUTO'} | ${(performance.now()-t0).toFixed(0)}ms`;
+
+    // Grid position using ellipse-corrected coordinates
+    const gridX = (nx + 1) / 2;
+    const gridY = (ny + 1) / 2;
+    let cell=-1;
+    if(gridX>=0&&gridX<=1&&gridY>=0&&gridY<=1)
+      cell=Math.min(2,Math.floor(gridY*3))*3+Math.min(2,Math.floor(gridX*3));
+
+    lastZone=zone;
+    drawOverlay(bcx,bcy,br,{x:bx,y:by},semiW,semiH,0,nx,ny);
+    drawDartPreview(gridX, gridY, zone);
+    cleanup();
+
+    const zoneWithPos = zone + ',' + gridX.toFixed(4) + ',' + gridY.toFixed(4);
+    console.log(`[Dart] pixel(${bx.toFixed(0)},${by.toFixed(0)}) angle=${angle.toFixed(0)}° seg=${segNum} dist=${rawDist.toFixed(2)} → ${zone}`);
+    return{cell, zone: zoneWithPos};
+
+  }catch(e){
+    console.error('[Detect]',e);
+    cleanup();
+    return{cell:-1,reason:e.message};
+  }
+
+  function cleanup(){
+    try{
+      if(src)src.delete();if(rgb)rgb.delete();if(hsv)hsv.delete();
+      if(redMask1)redMask1.delete();if(redMask2)redMask2.delete();
+      if(greenMask)greenMask.delete();if(boardColorMask)boardColorMask.delete();
+      if(blueMask)blueMask.delete();if(blueLow)blueLow.delete();if(blueHigh)blueHigh.delete();
+      if(kernel)kernel.delete();if(boardMasked)boardMasked.delete();
+      if(contours)contours.delete();if(hier)hier.delete();
+    }catch(e){}
+  }
+}
+
+function calcZone(nx,ny,nd){
+  let a=Math.atan2(nx,-ny)*180/Math.PI;if(a<0)a+=360;
+  const adj=nd/0.82;
+  if(adj<=.034)return'Bullseye';if(adj<=.085)return'Outer Bull';
+  let ring;
+  if(adj<=.47)ring='Single';else if(adj<=.52)ring='Triple';
+  else if(adj<=.88)ring='Single';else if(adj<=.935)ring='Double';else return'Miss';
+  let an=a+9;if(an>=360)an-=360;
+  return`${ring} ${SEG[Math.floor(an/18)]}`;
+}
+
+function showMask(mat,label){
+  $('miniView').style.display='block';
+  $('miniLabel').textContent=label;
+  const c=$('maskCanvas');
+  const color=new cv.Mat();cv.cvtColor(mat,color,cv.COLOR_GRAY2RGBA);
+  const d=color.data;
+  for(let i=0;i<d.length;i+=4){if(d[i]>0){d[i]=77;d[i+1]=159;d[i+2]=255;}}
+  cv.imshow(c,color);color.delete();
+}
+
+function drawDartPreview(gridX, gridY, zone){
+  $('miniView').style.display='block';
+  $('miniLabel').textContent=zone||'DART';
+  const c=$('maskCanvas');
+  c.width=200;c.height=200;
+  const ctx=c.getContext('2d');
+  const cx=100,cy=100,r=85;
+  const S=SEG;
+
+  ctx.fillStyle='#0a0a0f';ctx.fillRect(0,0,200,200);
+
+  // Draw dartboard segments
+  for(let i=0;i<20;i++){
+    const a1=(i*18-9-90)*Math.PI/180;
+    const a2=((i+1)*18-9-90)*Math.PI/180;
+    const even=i%2===0;
+
+    // Double ring
+    ctx.fillStyle=even?'#27ae60':'#c0392b';
+    ctx.beginPath();ctx.arc(cx,cy,r,a1,a2);ctx.arc(cx,cy,r*0.88,a2,a1,true);ctx.closePath();ctx.fill();
+
+    // Outer single
+    ctx.fillStyle=even?'#1a1a25':'#e8dcc8';
+    ctx.beginPath();ctx.arc(cx,cy,r*0.88,a1,a2);ctx.arc(cx,cy,r*0.63,a2,a1,true);ctx.closePath();ctx.fill();
+
+    // Triple ring
+    ctx.fillStyle=even?'#27ae60':'#c0392b';
+    ctx.beginPath();ctx.arc(cx,cy,r*0.63,a1,a2);ctx.arc(cx,cy,r*0.57,a2,a1,true);ctx.closePath();ctx.fill();
+
+    // Inner single
+    ctx.fillStyle=even?'#1a1a25':'#e8dcc8';
+    ctx.beginPath();ctx.arc(cx,cy,r*0.57,a1,a2);ctx.arc(cx,cy,r*0.1,a2,a1,true);ctx.closePath();ctx.fill();
+  }
+
+  // Bull
+  ctx.fillStyle='#27ae60';ctx.beginPath();ctx.arc(cx,cy,r*0.1,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#c0392b';ctx.beginPath();ctx.arc(cx,cy,r*0.04,0,Math.PI*2);ctx.fill();
+
+  // Lines
+  ctx.strokeStyle='#00000066';ctx.lineWidth=0.5;
+  for(let i=0;i<20;i++){
+    const a=(i*18-9-90)*Math.PI/180;
+    ctx.beginPath();ctx.moveTo(cx+Math.cos(a)*r*0.1,cy+Math.sin(a)*r*0.1);
+    ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);ctx.stroke();
+  }
+  [0.1,0.57,0.63,0.88,1.0].forEach(rr=>{
+    ctx.beginPath();ctx.arc(cx,cy,r*rr,0,Math.PI*2);ctx.stroke();
+  });
+
+  // Numbers
+  ctx.fillStyle='#ffffffcc';ctx.font='bold 9px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  for(let i=0;i<20;i++){
+    const a=(i*18-90)*Math.PI/180;
+    ctx.fillText(''+S[i], cx+Math.cos(a)*(r+11), cy+Math.sin(a)*(r+11));
+  }
+
+  // Dart hit position
+  if(gridX!==undefined && gridY!==undefined){
+    const dnx=(gridX-0.5)*2, dny=(gridY-0.5)*2;
+    const dx=cx+dnx*r, dy=cy+dny*r;
+
+    if (dartMarkerLoaded) {
+      const ms = 22;
+      ctx.drawImage(dartMarkerImg, dx - ms/2, dy - ms/2, ms, ms);
+    } else {
+      ctx.beginPath();ctx.arc(dx,dy,5,0,Math.PI*2);
+      ctx.fillStyle='#a8c11e';ctx.fill();
+      ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
+    }
+  }
+}
+
+function drawOverlay(cx,cy,r,dartPos,semiW,semiH,angle,corrNx,corrNy){
+  const c=$('overlay');const v=$('video');
+  c.width=v.clientWidth;c.height=v.clientHeight;
+  const ctx=c.getContext('2d');const sx=c.width/vW,sy=c.height/vH;
+  const dcx=cx*sx,dcy=cy*sy;
+  const sw=(semiW||r)*sx, sh=(semiH||r)*sy;
+
+  // Screen center crosshair
+  const scx=c.width/2, scy=c.height/2;
+  ctx.strokeStyle='#ffffff33';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(scx-30,scy);ctx.lineTo(scx+30,scy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(scx,scy-30);ctx.lineTo(scx,scy+30);ctx.stroke();
+
+  // Show locked center
+  if (lockedCenter) {
+    const lx = lockedCenter.x * sx, ly = lockedCenter.y * sy;
+    ctx.strokeStyle='#ffd700';ctx.lineWidth=2;
+    ctx.beginPath();ctx.arc(lx,ly,8,0,Math.PI*2);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(lx-12,ly);ctx.lineTo(lx+12,ly);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(lx,ly-12);ctx.lineTo(lx,ly+12);ctx.stroke();
+    // Lock radius circle
+    const lockR = Math.max(c.width, c.height) * 0.35;
+    ctx.strokeStyle='#ffd70033';ctx.lineWidth=1;ctx.setLineDash([6,4]);
+    ctx.beginPath();ctx.arc(lx,ly,lockR,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+  }
+
+  // Draw board outline on camera (thick, visible for alignment)
+  ctx.strokeStyle='#00e68a';ctx.lineWidth=4;
+  ctx.beginPath();ctx.ellipse(dcx,dcy,sw,sh,0,0,Math.PI*2);ctx.stroke();
+
+  // Inner rings on camera for alignment
+  ctx.strokeStyle='#00e68a88';ctx.lineWidth=2;
+  [0.57, 0.63, 0.88].forEach(rr => {
+    ctx.beginPath();ctx.ellipse(dcx,dcy,sw*rr,sh*rr,0,0,Math.PI*2);ctx.stroke();
+  });
+
+  // Bullseye rings
+  ctx.strokeStyle='#ff4d6a88';ctx.lineWidth=2;
+  ctx.beginPath();ctx.ellipse(dcx,dcy,sw*0.04,sh*0.04,0,0,Math.PI*2);ctx.stroke();
+  ctx.strokeStyle='#00e68a88';
+  ctx.beginPath();ctx.ellipse(dcx,dcy,sw*0.1,sh*0.1,0,0,Math.PI*2);ctx.stroke();
+
+  // Draw crosshair at center
+  ctx.strokeStyle='#00e68a';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(dcx-15,dcy);ctx.lineTo(dcx+15,dcy);ctx.moveTo(dcx,dcy-15);ctx.lineTo(dcx,dcy+15);ctx.stroke();
+
+  // Draw segment lines on camera board for alignment
+  const SEG_DRAW=[20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5];
+  ctx.strokeStyle='#ffffff55';ctx.lineWidth=1.5;
+  for(let i=0;i<20;i++){
+    const a=(i*18-9-90)*Math.PI/180;
+    ctx.beginPath();
+    ctx.moveTo(dcx+Math.cos(a)*sw*0.1,dcy+Math.sin(a)*sh*0.1);
+    ctx.lineTo(dcx+Math.cos(a)*sw,dcy+Math.sin(a)*sh);
+    ctx.stroke();
+  }
+
+  // Numbers on camera overlay
+  ctx.fillStyle='#00e68aaa';
+  ctx.font='bold '+Math.max(10,sw*0.07)+'px sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  for(let i=0;i<20;i++){
+    const a=(i*18-90)*Math.PI/180;
+    ctx.fillText(''+SEG_DRAW[i], dcx+Math.cos(a)*sw*1.08, dcy+Math.sin(a)*sh*1.08);
+  }
+
+  // Draw triple and double rings on camera
+  ctx.strokeStyle='#ff4d6a44';ctx.lineWidth=2;
+  ctx.beginPath();ctx.ellipse(dcx,dcy,sw*0.52*0.82,sh*0.52*0.82,0,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();ctx.ellipse(dcx,dcy,sw*0.47*0.82,sh*0.47*0.82,0,0,Math.PI*2);ctx.stroke();
+  ctx.strokeStyle='#00e68a44';ctx.lineWidth=2;
+  ctx.beginPath();ctx.ellipse(dcx,dcy,sw*0.935*0.82,sh*0.935*0.82,0,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();ctx.ellipse(dcx,dcy,sw*0.88*0.82,sh*0.88*0.82,0,0,Math.PI*2);ctx.stroke();
+
+  // Draw dart positions on camera feed
+  if(dartPos){
+    const dx=dartPos.x*sx,dy=dartPos.y*sy;
+    // Line from center to dart
+    ctx.strokeStyle='#ffff0044';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+    ctx.beginPath();ctx.moveTo(dcx,dcy);ctx.lineTo(dx,dy);ctx.stroke();ctx.setLineDash([]);
+    // Tip-corrected position — use dart marker image
+    if (dartMarkerLoaded) {
+      const ms = 32;
+      ctx.drawImage(dartMarkerImg, dx - ms/2, dy - ms/2, ms, ms);
+    } else {
+      ctx.beginPath();ctx.arc(dx,dy,8,0,Math.PI*2);
+      ctx.fillStyle='#a8c11e';ctx.fill();
+      ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+    }
+    // Raw detection position (small outline = tape position)
+    if(lastRawDart){
+      const rx=lastRawDart.x*sx, ry=lastRawDart.y*sy;
+      ctx.strokeStyle='#a8c11e66';ctx.lineWidth=1;
+      ctx.beginPath();ctx.arc(rx,ry,6,0,Math.PI*2);ctx.stroke();
+      ctx.strokeStyle='#a8c11e44';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(rx,ry);ctx.lineTo(dx,dy);ctx.stroke();
+    }
+    // Board center
+    ctx.beginPath();ctx.arc(dcx,dcy,6,0,Math.PI*2);
+    ctx.fillStyle='#ff4d6a';ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=1;ctx.stroke();
+  }
+
+  // Draw dartboard preview (always upright, 20 at top)
+  const prevSize = Math.min(c.width, c.height) * 0.35;
+  const prevX = c.width - prevSize/2 - 10;
+  const prevY = prevSize/2 + 10;
+  const pr = prevSize/2 - 5;
+
+  ctx.save();
+  ctx.translate(prevX, prevY);
+
+  const SEG=[20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5];
+
+  // Background
+  ctx.beginPath();ctx.arc(0,0,pr+3,0,Math.PI*2);
+  ctx.fillStyle='rgba(0,0,0,0.85)';ctx.fill();
+  ctx.strokeStyle='#333';ctx.lineWidth=1;ctx.stroke();
+
+  // Draw segments
+  for(let i=0;i<20;i++){
+    const startAng=(i*18-9-90)*Math.PI/180;
+    const endAng=((i+1)*18-9-90)*Math.PI/180;
+    const isEven=i%2===0;
+
+    const rings=[
+      [0, 0.034*0.82],
+      [0.034*0.82, 0.085*0.82],
+      [0.085*0.82, 0.47*0.82],
+      [0.47*0.82, 0.52*0.82],
+      [0.52*0.82, 0.88*0.82],
+      [0.88*0.82, 0.935*0.82]
+    ];
+    const colors=[
+      '#ff4d6a55','#00e68a55',
+      isEven?'#1a1a25':'#ffffff33',
+      isEven?'#ff4d6a55':'#00e68a55',
+      isEven?'#1a1a25':'#ffffff33',
+      isEven?'#ff4d6a55':'#00e68a55'
+    ];
+
+    for(let j=0;j<rings.length;j++){
+      ctx.beginPath();
+      ctx.arc(0,0,rings[j][1]*pr,startAng,endAng);
+      ctx.arc(0,0,rings[j][0]*pr,endAng,startAng,true);
+      ctx.closePath();
+      ctx.fillStyle=colors[j];ctx.fill();
+    }
+  }
+
+  // Ring outlines
+  ctx.strokeStyle='#ffffff22';ctx.lineWidth=0.5;
+  [0.034,0.085,0.47,0.52,0.88,0.935,1.0].forEach(rr=>{
+    ctx.beginPath();ctx.arc(0,0,rr*0.82*pr,0,Math.PI*2);ctx.stroke();
+  });
+
+  // Segment lines
+  for(let i=0;i<20;i++){
+    const a=(i*18-9-90)*Math.PI/180;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a)*0.085*0.82*pr,Math.sin(a)*0.085*0.82*pr);
+    ctx.lineTo(Math.cos(a)*pr,Math.sin(a)*pr);
+    ctx.stroke();
+  }
+
+  // Numbers
+  ctx.fillStyle='#ffffffaa';
+  ctx.font='bold '+Math.max(8,pr*0.12)+'px Space Mono,monospace';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  for(let i=0;i<20;i++){
+    const a=(i*18-90)*Math.PI/180;
+    ctx.fillText(''+SEG[i],Math.cos(a)*pr*0.92,Math.sin(a)*pr*0.92);
+  }
+
+  // Draw corrected dart position on preview board
+  if(dartPos && corrNx !== undefined && corrNy !== undefined){
+    // corrNx, corrNy are -1..1, map to preview
+    // For dartboard: angle from top (20), distance from center
+    const dotX = corrNx * 0.82 * pr;
+    const dotY = corrNy * 0.82 * pr;
+
+    ctx.beginPath();ctx.arc(dotX,dotY,5,0,Math.PI*2);
+    ctx.fillStyle='#ffd700';ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
+
+    // Zone label
+    if(lastZone){
+      ctx.fillStyle='#ffd700';
+      ctx.font='bold '+Math.max(9,pr*0.1)+'px Space Mono,monospace';
+      ctx.textAlign='left';
+      ctx.fillText(lastZone, dotX+8, dotY-4);
+    }
+  }
+
+  ctx.restore();
+}
+var lastZone='';
+
+// ─── Shared ───
+let autoInterval = null;
+let autoRunning = false;
+
+// Tracks last detected dart position to avoid sending same dart twice
+let lastAutoSentPos = null;
+const AUTO_MIN_MOVE = 0.04;   // 4% of board = new dart
+
+async function autoDetectAndSend() {
+  if (!cvReady) { return; }
+  if (!gameId) { console.warn('[Auto] No gameId — not joined to a game?'); return; }
+  const result = runDetection();
+  if (result.cell < 0) {
+    // No dart visible — reset so next detection counts as new
+    if (lastAutoSentPos) console.log('[Auto] Dart removed — reset');
+    lastAutoSentPos = null;
+    return;
+  }
+
+  // Parse position from zone string (format: "Single 20,0.4,0.3")
+  const parts = result.zone.split(',');
+  if (parts.length < 3) {
+    console.warn('[Auto] Zone has no position:', result.zone);
+    return;
+  }
+  const gridX = parseFloat(parts[parts.length - 2]);
+  const gridY = parseFloat(parts[parts.length - 1]);
+  if (isNaN(gridX) || isNaN(gridY)) {
+    console.warn('[Auto] Invalid coords in zone:', result.zone);
+    return;
+  }
+
+  // If dart hasn't moved enough, it's the same dart — skip
+  if (lastAutoSentPos) {
+    const dist = Math.hypot(gridX - lastAutoSentPos.gridX, gridY - lastAutoSentPos.gridY);
+    if (dist < AUTO_MIN_MOVE) return;
+    console.log('[Auto] New dart detected (moved ' + dist.toFixed(3) + ')');
+  } else {
+    console.log('[Auto] First dart detected');
+  }
+
+  lastAutoSentPos = { gridX, gridY };
+
+  try {
+    await sbInsert('dart_throws', {
+      game_id: gameId,
+      player: currentPlayer,
+      trigger_type: 'auto',
+      cell: result.cell,
+      zone: result.zone,
+      status: 'done'
+    });
+    const zoneName = result.zone.split(',')[0];
+    toast(zoneName, 'Auto sent', false);
+    console.log('[Auto] Sent ' + zoneName);
+  } catch(e) {
+    console.warn('[Auto] Send failed:', e);
+  }
+}
+
+function toggleAuto() {
+  const btn = $('autoBtn');
+  const hint = $('hint');
+  if (autoRunning) {
+    clearInterval(autoInterval);
+    autoInterval = null;
+    autoRunning = false;
+    if (btn) { btn.style.background = 'var(--surface)'; btn.textContent = 'AUTO'; }
+    if (hint) hint.textContent = 'Auto tracking OFF';
+  } else {
+    autoRunning = true;
+    lastAutoSentPos = null;
+    if (btn) {
+      btn.style.background = 'var(--gold)';
+      btn.style.color = 'var(--bg)';
+      btn.textContent = 'STOP';
+    }
+    if (hint) hint.textContent = 'Auto ON — sends new darts automatically';
+    autoInterval = setInterval(() => {
+      if (cvReady) autoDetectAndSend();
+    }, 200);
+  }
+}
+
+function mainAction(){
+  if(mode==='player') triggerThrow();
+  else manualDetect();
+}
+
+function checkWin(){
+  for(const[a,b,c]of WINS)if(board[a]&&board[a]===board[b]&&board[a]===board[c])return board[a];
+  return null;
+}
+
+function showWin(w){
+  $('winText').textContent=w?(w===1?'X WINS!':'O WINS!'):'DRAW!';
+  $('winText').style.color=w===1?'var(--red)':w===2?'var(--blue)':'var(--text-dim)';
+  $('winSub').textContent=w?`Player ${w} wins!`:'No winner';
+  $('winBanner').classList.add('show');
+}
+
+async function newRound(){
+  board=[0,0,0,0,0,0,0,0,0];currentPlayer=1;
+  $('winBanner').classList.remove('show');
+  $('mainBtn').disabled=false;
+  await sbUpdate('dart_games', `id=eq.${gameId}`, {board:[0,0,0,0,0,0,0,0,0],current_player:1,winner:0,status:'playing',updated_at:new Date().toISOString()});
+  if(mode==='player')renderPlayerBoard();
+  updateTurn();
+}
+
+function updateTurn(){
+  const el=$('turnLabel');
+  if (!el) return;
+  el.textContent=currentPlayer===1?'X':'O';
+  el.className=`player ${currentPlayer===1?'x':'o'}`;
+}
+
+function toast(m,s,err){
+  $('tMain').textContent=m;
+  $('tMain').style.color=err?'var(--red)':'var(--accent)';
+  $('tSub').textContent=s;
+  $('toast').classList.add('show');
+  setTimeout(()=>$('toast').classList.remove('show'),2500);
+}
+</script>
+
+<script>
+// Load OpenCV
+function onOpenCvReady(){ cvReady=true; console.log('[OpenCV] Ready'); }
+</script>
+<script async src="https://docs.opencv.org/4.9.0/opencv.js" onload="onOpenCvReady()" onerror="console.error('OpenCV failed')"></script>
+</body>
+</html>
