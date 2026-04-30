@@ -1,0 +1,2 @@
+# BullsAI
+Automatic dart detection
