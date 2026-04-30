@@ -1,0 +1,2 @@
+const SUPABASE_URL = 'https://bcjaywyarbrqnldxssmp.snapcloud.dev';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjamF5d3lhcmJycW5sZHhzc21wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzA2NDEsImV4cCI6MjA5MTE0NjY0MX0.dMspq6TMxZv8-fGDk2uqtYlUDpZxPlNZzqli3sp82B4';
