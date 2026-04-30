@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>BullsAI</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="config.js"></script>
 <style>
   @font-face {
     font-family: 'SuperFortrees';
@@ -239,8 +240,11 @@ function $(id) {
 }
 
 // ─── Config ───
-const SUPABASE_URL = 'https://bcjaywyarbrqnldxssmp.snapcloud.dev';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjamF5d3lhcmJycW5sZHhzc21wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NzA2NDEsImV4cCI6MjA5MTE0NjY0MX0.dMspq6TMxZv8-fGDk2uqtYlUDpZxPlNZzqli3sp82B4';
+// SUPABASE_URL and SUPABASE_KEY are defined in config.js (gitignored)
+// Copy config.example.js to config.js and fill in your credentials
+if (typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_KEY === 'undefined') {
+  alert('Missing config.js — copy config.example.js to config.js and add your Supabase credentials');
+}
 const WINS=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 const SEG=[20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5];
 const HEADERS={'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=representation'};
