@@ -1,0 +1,56 @@
+- !<AssetImportMetadata/ba95aa91-d3e4-4667-9560-54155640aea3>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> cb8e88ad-7934-40a4-a7c2-e2c7e540e19c
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> cb8e88ad-7934-40a4-a7c2-e2c7e540e19c
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 2a63ce36-1015-4d34-8976-d0f6c6203a43
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<SceneObject/1e32502e-be34-4882-4afd-54b1b29eca20>
+  PrefabRemaps:
+    []
+  Name: O
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 45.004868, y: 45.004868, z: 45.004868}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 969f3ff9-b6b7-49c5-694d-664e5d23329e
+- !<ObjectPrefabAssetData/2a63ce36-1015-4d34-8976-d0f6c6203a43>
+  Prototype: !<ObjectOwner/a53c5ff8-541a-4eac-90c4-fbd3c766e96a>
+    PackagePath: ""
+    objects:
+      - !<own> 1e32502e-be34-4882-4afd-54b1b29eca20
+- !<RenderMeshVisual/969f3ff9-b6b7-49c5-694d-664e5d23329e>
+  PrefabRemaps:
+    []
+  Name: Torus.001
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> e0c15867-71ef-443f-88cc-fff6e64dd9d1
+  Mesh: !<reference> 51bce72c-9362-41e0-8bb6-0e3fcad7c610
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}

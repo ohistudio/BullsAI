@@ -1,0 +1,59 @@
+- !<ObjectPrefab/3745fdf1-d431-4ef3-8b9e-781befd036f9>
+  PackagePath: ""
+  objects:
+    - !<own> d4d43b47-3697-4934-8b1f-8c5ce5c37b4e
+  LazyLoading: false
+  RetainAssets: true
+- !<RenderMeshVisual/c41b20d1-d2f5-4f84-8d2b-9bc943c50013>
+  PrefabRemaps:
+    []
+  Name: Cube.009
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> c76ebebe-a14e-4d78-9cda-ea58a8012864
+  Mesh: !<reference> b5185869-f425-4dbc-92f0-1014873db875
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/d4d43b47-3697-4934-8b1f-8c5ce5c37b4e>
+  PrefabRemaps:
+    - c41b20d1-d2f5-4f84-8d2b-9bc943c50013: c41b20d1-d2f5-4f84-72d4-6436bc3affec
+    - d4d43b47-3697-4934-8b1f-8c5ce5c37b4e: d4d43b47-3697-4934-74e0-73a31a3c84b1
+    - fd7b679a-c262-400c-999a-cd73985fd373: fd7b679a-c262-400c-6665-328c67a02c8c
+  Name: XSHAPE
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> fd7b679a-c262-400c-999a-cd73985fd373
+  Components:
+    []
+- !<SceneObject/fd7b679a-c262-400c-999a-cd73985fd373>
+  PrefabRemaps:
+    - c41b20d1-d2f5-4f84-8d2b-9bc943c50013: 7ce6d754-15a8-4275-4031-732bb04aee10
+    - fd7b679a-c262-400c-999a-cd73985fd373: 99d2a4f3-9ac5-4008-5446-ff6a12090f79
+  Name: X
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 90.000000, y: -0.000003, z: -45.000015}
+    Scale: {x: 4.000000, y: 0.935863, z: 1.036367}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> c41b20d1-d2f5-4f84-8d2b-9bc943c50013

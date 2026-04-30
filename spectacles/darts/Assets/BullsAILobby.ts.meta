@@ -1,0 +1,188 @@
+- !<AssetImportMetadata/8a7697c4-1fb3-409a-a808-182c17585c23>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 6bf345b3-7d7b-43ba-8237-d7027790a73e
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 6bf345b3-7d7b-43ba-8237-d7027790a73e
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 656be052-5a83-465c-99cd-c7f6e5251da8
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/656be052-5a83-465c-99cd-c7f6e5251da8>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 70da700a-42b9-4c10-a5bd-3b8234a1c36c
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    appleBackButton: false
+    appleButton: false
+    appleContainer: false
+    appleResetButton: false
+    appleScript: false
+    backButton: false
+    bubblePopBackButton: false
+    bubblePopButton: false
+    bubblePopContainer: false
+    bubblePopResetButton: false
+    bubblePopScript: false
+    codeInput: false
+    dartAssistScript: false
+    dartBoard: false
+    dartMarkerPrefab: false
+    freeThrowBackButton: false
+    freeThrowButton: false
+    freeThrowContainer: false
+    freeThrowResetButton: false
+    freeThrowText: false
+    joinButton: false
+    learnBackButton: false
+    learnBackInGameButton: false
+    learnBoardButton: false
+    learnButton: false
+    learnContainer: false
+    learnDrillsButton: false
+    learnMenuScreen: false
+    learnResetButton: false
+    learnTechniqueButton: false
+    lobbyScreen: false
+    mainMenuScreen: false
+    playBackButton: false
+    playButton: false
+    playMenuScreen: false
+    slimeFace: false
+    statusText: false
+    ticTacToeBackButton: false
+    ticTacToeButton: false
+    ticTacToeContainer: false
+    ticTacToeResetButton: false
+    ticTacToeScript: false
+    uiPanel: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - dartBoard: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      uiPanel: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      slimeFace: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      mainMenuScreen: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      lobbyScreen: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnMenuScreen: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      playMenuScreen: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      playButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      freeThrowButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnBoardButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnTechniqueButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnDrillsButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnBackButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      ticTacToeButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      bubblePopButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      appleButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      playBackButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      joinButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      backButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      codeInput: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      statusText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      learnContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      dartAssistScript: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      ticTacToeContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      ticTacToeScript: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
+      bubblePopContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      bubblePopScript: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
+      appleContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      appleScript: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
+      freeThrowContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnBackInGameButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnResetButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      ticTacToeBackButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      ticTacToeResetButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      bubblePopBackButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      bubblePopResetButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      appleBackButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      appleResetButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      freeThrowBackButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      freeThrowResetButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      dartMarkerPrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      freeThrowText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Core"}'
+    - // @input AssignableType dartBoard
+    - // @input SceneObject uiPanel
+    - // @input SceneObject slimeFace
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Screens"}'
+    - // @input SceneObject mainMenuScreen
+    - // @input SceneObject lobbyScreen
+    - // @input SceneObject learnMenuScreen
+    - // @input SceneObject playMenuScreen
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Main Menu Buttons"}'
+    - // @input SceneObject learnButton
+    - // @input SceneObject playButton
+    - // @input SceneObject freeThrowButton
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Learn Menu Buttons"}'
+    - // @input SceneObject learnBoardButton
+    - // @input SceneObject learnTechniqueButton
+    - // @input SceneObject learnDrillsButton
+    - // @input SceneObject learnBackButton
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Play Menu Buttons"}'
+    - // @input SceneObject ticTacToeButton
+    - // @input SceneObject bubblePopButton
+    - // @input SceneObject appleButton
+    - // @input SceneObject playBackButton
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Lobby"}'
+    - // @input SceneObject joinButton
+    - // @input SceneObject backButton
+    - // @input SceneObject codeInput
+    - // @input Component.Text statusText
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Game Containers"}'
+    - // @input SceneObject learnContainer
+    - // @input AssignableType_1 dartAssistScript
+    - // @input SceneObject ticTacToeContainer
+    - // @input AssignableType_2 ticTacToeScript
+    - // @input SceneObject bubblePopContainer
+    - // @input AssignableType_3 bubblePopScript
+    - // @input SceneObject appleContainer
+    - // @input AssignableType_4 appleScript
+    - // @input SceneObject freeThrowContainer
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"In-Game Buttons (each container has back + reset)"}'
+    - // @input SceneObject learnBackInGameButton
+    - // @input SceneObject learnResetButton
+    - // @input SceneObject ticTacToeBackButton
+    - // @input SceneObject ticTacToeResetButton
+    - // @input SceneObject bubblePopBackButton
+    - // @input SceneObject bubblePopResetButton
+    - // @input SceneObject appleBackButton
+    - // @input SceneObject appleResetButton
+    - // @input SceneObject freeThrowBackButton
+    - // @input SceneObject freeThrowResetButton
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Free Throw"}'
+    - // @input Asset.ObjectPrefab dartMarkerPrefab
+    - // @input Component.Text freeThrowText
+    - '// @ui {"widget":"group_end"}'

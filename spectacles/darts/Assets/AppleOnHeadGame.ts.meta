@@ -1,0 +1,71 @@
+- !<AssetImportMetadata/1fb517d1-ca5b-40e6-b22e-539e88d73342>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 1ba26ba0-67a6-4aca-841b-6b0539bde82b
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 1ba26ba0-67a6-4aca-841b-6b0539bde82b
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> a0098cb6-4b73-4d95-86ec-312b6bae8073
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/a0098cb6-4b73-4d95-86ec-312b6bae8073>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: a3241860-dc80-4c41-b72f-99fe547a5081
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    applePrefab: false
+    appleSpawnPoint: false
+    dartBoard: false
+    headObject: false
+    launchForce: false
+    launchUp: false
+    scoreText: false
+    statusText: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - dartBoard: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      appleSpawnPoint: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      applePrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      headObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      launchForce: !<float> 200.000000
+      launchUp: !<float> 100.000000
+      scoreText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      statusText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType dartBoard
+    - '// @ui {"widget":"group_start", "label":"Scene"}'
+    - '// @input SceneObject appleSpawnPoint {"hint":"Spawn point for the apple (on top of head)"}'
+    - // @input Asset.ObjectPrefab applePrefab
+    - '// @input SceneObject headObject {"hint":"The Bitmoji head/face to react on misses"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Physics"}'
+    - // @input float launchForce = 200
+    - // @input float launchUp = 100
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"UI"}'
+    - // @input Component.Text scoreText
+    - // @input Component.Text statusText
+    - '// @ui {"widget":"group_end"}'

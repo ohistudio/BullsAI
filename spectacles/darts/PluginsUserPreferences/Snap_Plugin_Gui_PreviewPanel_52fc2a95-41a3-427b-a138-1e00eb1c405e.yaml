@@ -1,0 +1,80 @@
+backCameraMultimedia:
+  type: string
+  value: PreviewResources.bundle/Video/Idle/Idle.mp4
+  options: 4
+cameraType:
+  type: int
+  value: 0
+  options: 4
+deviceType:
+  type: string
+  value: Spectacles
+  options: 4
+fpsLogging:
+  type: bool
+  value: false
+  options: 4
+frameRate:
+  type: int
+  value: 30
+  options: 4
+frontCameraMultimedia:
+  type: string
+  value: PreviewResources.bundle/Video/Idle/Idle.mp4
+  options: 4
+fullscreenSpectaclesSimulation:
+  type: bool
+  value: true
+  options: 4
+lastPosition:
+  type: vec3
+  value: {x: -148.416214, y: -1.257086, z: -260.163696}
+  options: 4
+lastRotation:
+  type: vec3
+  value: {x: -173.998810, y: 88.282288, z: 179.999634}
+  options: 4
+mirrorHorizontally:
+  type: bool
+  value: false
+  options: 4
+previewSource:
+  type: string
+  value: InteractiveResources.bundle/Scenes/Sunlit Room
+  options: 4
+previewTarget:
+  type: int
+  value: 0
+  options: 4
+previewType:
+  type: string
+  value: Interactive
+  options: 4
+recordInput:
+  type: bool
+  value: false
+  options: 4
+recordTrackingData:
+  type: bool
+  value: false
+  options: 4
+resolutionScale:
+  type: float
+  value: 1.000000
+  options: 4
+simulatedDevice:
+  type: string
+  value: No Simulation
+  options: 4
+stereoEye:
+  type: string
+  value: Center
+  options: 4
+tintSpectaclesSimulation:
+  type: bool
+  value: true
+  options: 4
+uiMode:
+  type: int
+  value: 1
+  options: 4

@@ -1,0 +1,53 @@
+- !<AssetImportMetadata/295a17c8-eb5f-484e-a9e0-36b30e4eb586>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> e173c510-b72a-4222-bd66-1bddb5b9d254
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> e173c510-b72a-4222-bd66-1bddb5b9d254
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> e691c997-2379-4e0e-9fbc-8bfd13c90e4c
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/e691c997-2379-4e0e-9fbc-8bfd13c90e4c>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 2f0897e5-1cf7-4033-8518-d993482f63d8
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    dartBoard: false
+    oPrefab: false
+    turnText: false
+    xPrefab: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - dartBoard: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      xPrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      oPrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      turnText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType dartBoard
+    - // @input Asset.ObjectPrefab xPrefab
+    - // @input Asset.ObjectPrefab oPrefab
+    - // @input Component.Text turnText

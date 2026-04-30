@@ -1,0 +1,37 @@
+- !<NativePackageDescriptor/30e36895-ba4b-44ef-a9a1-4ef11b8dc242>
+  PackagePath: ""
+  StudioVersion:
+    major: 5
+    minor: 15
+    patch: 0
+    build: 25101318
+    type: Unset
+    buildFlavor: ""
+    timestamp: 0
+    commit: ""
+  Description: Soap Bubble Material The material makes your 3D mesh look like soap bubble. Similar to Iridescence material but without texture input for opacity.
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  VersionMajor: 1
+  VersionMinor: 0
+  VersionPatch: 0
+  UpdateCheckpoint: 76
+  ExportUid: 793d7fe1-730c-4c7e-acb2-899de837f23e
+  ComponentUid: e0d729e9-eb06-45ce-8604-5ecb27cb6ae7
+  PackagePolicy: CanBeUnpackedTransparent
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  Instantiable: !<reference> 00000000-0000-0000-0000-000000000000
+  AssetLibraryDependencyStructure: !<AssetLibraryDependencyStructure>
+    Name: ""
+    AssetId: ""
+    Hash: ""
+    Version:
+      major: 0
+      minor: 0
+      patch: 0
+      build: 0

@@ -1,0 +1,74 @@
+- !<AssetImportMetadata/4ae00524-2e56-403a-8b0f-a11eee9e3755>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 8a46848b-4cb3-42d3-9c8a-dc4b0e847e2f
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 8a46848b-4cb3-42d3-9c8a-dc4b0e847e2f
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 46f383c6-b40b-4122-9e11-1dd116c9ff64
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/46f383c6-b40b-4122-9e11-1dd116c9ff64>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: f9f3ea32-dea3-4f59-be53-c092368bf45b
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    cameraObject: false
+    dartBoard: false
+    dialogueText: false
+    distanceWarningEnabled: false
+    hitMarkerPrefab: false
+    ochiDistanceMeters: false
+    statsText: false
+    subText: false
+    targetHighlight: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - dartBoard: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      dialogueText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      subText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      statsText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      targetHighlight: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      hitMarkerPrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      cameraObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      ochiDistanceMeters: 2.370000
+      distanceWarningEnabled: true
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType dartBoard
+    - '// @ui {"widget":"group_start", "label":"UI"}'
+    - // @input Component.Text dialogueText
+    - // @input Component.Text subText
+    - // @input Component.Text statsText
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Target"}'
+    - '// @input SceneObject targetHighlight {"hint":"A disc/ring prefab to highlight target zone on the board"}'
+    - // @input Asset.ObjectPrefab hitMarkerPrefab
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Distance"}'
+    - // @input SceneObject cameraObject
+    - // @input float ochiDistanceMeters = 2.37
+    - // @input bool distanceWarningEnabled = true
+    - '// @ui {"widget":"group_end"}'

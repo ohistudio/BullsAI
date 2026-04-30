@@ -1,0 +1,73 @@
+- !<AssetImportMetadata/fed6966f-8f1e-495c-bb19-5b38cd53e4d3>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> f8638837-5117-49b6-9fe0-4fc47c613cf4
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> f8638837-5117-49b6-9fe0-4fc47c613cf4
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 3d858b10-f663-476e-a365-82f61da81ca6
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/3d858b10-f663-476e-a365-82f61da81ca6>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 1d6c078a-9a89-4ea4-b8de-16eee6fbdd11
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    boardDisc: false
+    boardSize: false
+    dartMarkerPrefab: false
+    gameCode: false
+    markerScale: false
+    pollInterval: false
+    statusText: false
+    supabaseProject: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - supabaseProject: !<reference.SupabaseProject> 00000000-0000-0000-0000-000000000000
+      gameCode: ""
+      boardDisc: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      boardSize: !<float> 25.000000
+      markerScale: !<float> 3.000000
+      dartMarkerPrefab: !<reference.ObjectPrefab> 00000000-0000-0000-0000-000000000000
+      pollInterval: !<float> 1.000000
+      statusText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Supabase"}'
+    - // @input Asset.SupabaseProject supabaseProject
+    - // @input string gameCode
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Board"}'
+    - // @input SceneObject boardDisc
+    - // @input float boardSize = 25
+    - // @input float markerScale = 3
+    - // @input Asset.ObjectPrefab dartMarkerPrefab
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Polling"}'
+    - // @input float pollInterval = 0.3
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"UI"}'
+    - // @input Component.Text statusText
+    - '// @ui {"widget":"group_end"}'

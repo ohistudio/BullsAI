@@ -1,0 +1,145 @@
+- !<AssetImportMetadata/4984ded0-45f6-44af-862a-87590edbf5e2>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 368f6fd7-de3f-48e8-909a-a6530304b943
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 368f6fd7-de3f-48e8-909a-a6530304b943
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 59d051db-2fed-401d-b45c-645681df1924
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<AnimationPlayer/054a155c-bcdb-4684-b573-23f61050dfd7>
+  PrefabRemaps:
+    []
+  Name: Animation Player
+  Enabled: true
+  Autoplay: true
+  ClipRangeType: Frames
+  AnimationClips:
+    - !<AnimationClip>
+      AnimationAsset: !<reference> 74ef4c03-c545-4812-8d0a-d8512fa8a730
+      Name: Clip 0
+      Weight: 1.000000
+      PlaybackSpeed: 1.000000
+      Begin: 0.000000
+      End: 257.000000
+      Offset: 0.000000
+      Reversed: false
+      Disabled: false
+      BlendMode: Default
+      ScaleMode: Multiply
+      PlaybackMode: PingPong
+- !<SceneObject/13f872e2-1f90-4423-53fd-c829b288d00f>
+  PrefabRemaps:
+    []
+  Name: Red
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 10.000000, y: 10.000000, z: 10.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 8ab2dfb3-0bc3-408c-9915-46896e6cc3c7
+  Components:
+    - !<own> 76c8d7de-9bac-499a-6c4e-fc0218978bfd
+- !<ScriptComponent/51b8dfe4-b365-40ae-9334-f48203bc2ffc>
+  PrefabRemaps:
+    []
+  Name: Bitmoji 3D
+  Enabled: true
+  ScriptAsset: !<reference> 7a3c78c1-4ff4-41a1-9f38-a2b9e6360f03
+  ScriptInputsDefault:
+    friendIndex: true
+    autoDownload: true
+    autoMention: true
+    materialHolder: true
+    printDebug: true
+    loaderPrefab: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      bitmojiType: !<float> 1.000000
+      friendsComponent: !<reference.Component> f236e530-e37b-4369-b94a-840dc71141ff
+      friendIndex: 0
+      mixamoAnimation: false
+      autoDownload: true
+      renderOrder: 1
+      castShadow: false
+      autoMention: true
+      materialHolder: !<reference.Material> 40b3147b-e211-4919-9ba0-bedd05c60132
+      printDebug: false
+      loaderPrefab: !<reference.ObjectPrefab> 3642f110-de5e-4fcd-9cf9-bdd9164d8108
+  ScriptTypes:
+    "":
+      {}
+- !<ObjectPrefabAssetData/59d051db-2fed-401d-b45c-645681df1924>
+  Prototype: !<ObjectOwner/667a6905-4f94-4d05-8923-82b3b2f245fb>
+    PackagePath: ""
+    objects:
+      - !<own> 13f872e2-1f90-4423-53fd-c829b288d00f
+- !<RenderMeshVisual/76c8d7de-9bac-499a-6c4e-fc0218978bfd>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 1
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 79c138f8-01b0-4922-8ca5-688b58559faa
+  Mesh: !<reference> 1a01492e-0adf-4043-ab1c-1cd62f40021a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/8ab2dfb3-0bc3-408c-9915-46896e6cc3c7>
+  PrefabRemaps:
+    []
+  Name: Bitmoji 3D
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: -0.457658, z: -0.048038}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 0.008000, y: 0.008000, z: 0.008000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 51b8dfe4-b365-40ae-9334-f48203bc2ffc
+    - !<own> 054a155c-bcdb-4684-b573-23f61050dfd7
+    - !<own> a656ecd3-f99e-43ce-901c-dcbee3765034
+- !<ScriptComponent/a656ecd3-f99e-43ce-901c-dcbee3765034>
+  PrefabRemaps:
+    []
+  Name: BitmojiAnimationController
+  Enabled: true
+  ScriptAsset: !<reference> 56a1e1d1-4ae4-4bd4-9682-a6ee20c688fe
+  ScriptInputsDefault:
+    animationAsset: true
+    heavyAnimationAsset: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      bitmoji3dComponent: !<reference.ScriptComponent> 51b8dfe4-b365-40ae-9334-f48203bc2ffc
+      animationPlayer: !<reference.AnimationPlayer> 054a155c-bcdb-4684-b573-23f61050dfd7
+      animationAsset: !<reference.AnimationAsset> 74ef4c03-c545-4812-8d0a-d8512fa8a730
+      heavyAnimationAsset: !<reference.AnimationAsset> 918fa594-e4d7-40f8-b2cd-5710ae74f96c
+  ScriptTypes:
+    "":
+      {}

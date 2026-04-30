@@ -1,0 +1,68 @@
+- !<AssetImportMetadata/47a604f7-20ea-4bd1-a496-e7d283ff3c36>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 61a27eff-f209-402b-a030-018827ca2625
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 61a27eff-f209-402b-a030-018827ca2625
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 38052df5-c2eb-4bfc-b128-8412b2f973f8
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/38052df5-c2eb-4bfc-b128-8412b2f973f8>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 5c862a85-dbb7-42dc-a819-5f3a3a17ccc7
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    dartAssistContainer: false
+    dartAssistScript: false
+    dartBoard: false
+    learnMenuContainer: false
+    mainMenuContainer: false
+    playMenuContainer: false
+    ticTacToeContainer: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - dartBoard: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      mainMenuContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      learnMenuContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      playMenuContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      dartAssistContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      dartAssistScript: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      ticTacToeContainer: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType dartBoard
+    - '// @ui {"widget":"group_start", "label":"Menus"}'
+    - // @input SceneObject mainMenuContainer
+    - // @input SceneObject learnMenuContainer
+    - // @input SceneObject playMenuContainer
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Learn Modes"}'
+    - // @input SceneObject dartAssistContainer
+    - // @input AssignableType_1 dartAssistScript
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Play Modes"}'
+    - // @input SceneObject ticTacToeContainer
+    - '// @ui {"widget":"group_end"}'
