@@ -7,6 +7,7 @@
 **Snap Spectacles that watch your darts, coach your throw, and turn any dartboard into a smart training ground with games — throw, learn, and play.**
 
 [![Watch the trailer](https://img.shields.io/badge/▶-Watch_the_trailer-purple?style=for-the-badge)](https://www.youtube.com/watch?v=wr63v62yR7k)
+[![Try it now](https://img.shields.io/badge/▶-Try_the_phone_detector-orange?style=for-the-badge)](https://ohistudio.github.io/BullsAI/web/darts.html)
 
 *Built for the XRCC 2026 Hackathon — "Kill The Manual" track.*
 
